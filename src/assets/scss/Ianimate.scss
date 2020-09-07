@@ -1,0 +1,35 @@
+@keyframes ants {
+  to {
+    background-position: 100%;
+  }
+}
+@keyframes wave {
+  from {
+    transform: rotate(0deg);
+  }
+  from {
+    transform: rotate(-360deg);
+  }
+}
+// .wave-animate-wrap {
+//   border-radius: inherit;
+//   position: absolute;
+//   z-index: -1;
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   overflow: hidden;
+//   background: linear-gradient(to left, #04ffe4, #048ad3);
+//   .wave-animate {
+//     width: 200%;
+//     height: 200%;
+//     position: absolute;
+//     border-radius: 35% 47% 45% 30%;
+//     border-radius: 50%;
+//     top: -120%;
+//     left: -50%;
+//     background: #1a1a1c;
+//     animation: wave 15s infinite linear;
+//   }
+// }

@@ -1,0 +1,109 @@
+@import '../../variables';
+
+@mixin com-var($activeColor) {
+  .hover:hover,
+  .actived {
+    color: $activeColor;
+  }
+}
+
+@mixin panel-theme(
+  $activeColor,
+  $activeColorHasFont,
+  $activeBtn,
+  $color,
+  $bgColor,
+  $cardColor,
+  $subCardColor,
+  $borderColor,
+  $modules
+) {
+  // .panel {
+  //   .panel-body {
+  //     background-color: $cardColor;
+  //   }
+  // }
+  .panel.panel-block {
+    background-color: $cardColor;
+    color: $color;
+    .panel-title {
+      .title-btn {
+        color: $activeColor;
+      }
+    }
+  }
+}
+// 左侧菜单展开/关闭按钮
+@mixin header-sidenav-theme(
+  $activeColor,
+  $activeColorHasFont,
+  $activeBtn,
+  $color,
+  $bgColor,
+  $cardColor,
+  $subCardColor,
+  $borderColor,
+  $modules
+) {
+  // 只有主题与基础不一致时才需要改变头部和左侧菜单导航
+  @if $bgColor != $theme-base-bgColor {
+    .sidenav,
+    .header {
+      background-color: $cardColor;
+    }
+  }
+  .theme-switch-btn {
+    // color: #999999; // $borderColor; // dis
+    &.actived {
+      color: $activeColor; // $color;
+    }
+  }
+}
+
+@mixin frame-theme(
+  $activeColor,
+  $activeColorHasFont,
+  $activeBtn,
+  $color,
+  $bgColor,
+  $cardColor,
+  $subCardColor,
+  $borderColor,
+  $modules
+) {
+  background-color: $bgColor;
+  color: $color;
+  .icon {
+    color: inherit;
+  }
+  .module-content {
+    .module-content-close {
+      &:hover {
+        color: $activeColor;
+      }
+    }
+  }
+  @include com-var($activeColor);
+  @include panel-theme(
+    $activeColor,
+    $activeColorHasFont,
+    $activeBtn,
+    $color,
+    $bgColor,
+    $cardColor,
+    $subCardColor,
+    $borderColor,
+    $modules
+  );
+  @include header-sidenav-theme(
+    $activeColor,
+    $activeColorHasFont,
+    $activeBtn,
+    $color,
+    $bgColor,
+    $cardColor,
+    $subCardColor,
+    $borderColor,
+    $modules
+  );
+}

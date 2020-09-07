@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title><%= htmlWebpackPlugin.options.title %></title>
+    <meta name="description" content="hx-cloud-web" />
+    <meta name="keywords" content="合续;合续环境;合续智控云平台;智控;合续智控;<%= htmlWebpackPlugin.options.title %>;" />
+    <meta name="viewport" content="user-scalable=no, width=device-width,initial-scale=1,minimum-scale=1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <link rel="icon" type="image/png" sizes="32x32" href="<%= BASE_URL %>img/icons/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="<%= BASE_URL %>img/icons/favicon-16x16.png" />
+    <!--[if IE]><link rel="shortcut icon" href="<%= BASE_URL %>img/icons/favicon.ico"/><![endif]-->
+    <!-- Add to home screen for Android and modern mobile browsers -->
+    <link rel="manifest" href="<%= BASE_URL %>manifest.json" />
+    <link rel="mask-icon" href="<%= BASE_URL %>img/icons/safari-pinned-tab.svg" color="#603cba" />
+    <meta name="theme-color" content="#603cba" />
+    <!-- Add to home screen for Safari on iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="hx-cloud-web" />
+    <link rel="apple-touch-icon" sizes="180x180" href="<%= BASE_URL %>img/icons/apple-touch-icon.png" />
+    <!-- Add to home screen for Windows -->
+    <meta name="msapplication-TileImage" content="<%= BASE_URL %>img/icons/mstile-150x150.png" />
+    <meta name="msapplication-TileColor" content="#000000" />
+    <!-- built files will be auto injected -->
+  </head>
+
+  <body style="margin:0" class="themem">
+    <noscript> This is your fallback content in case JavaScript fails to load. </noscript>
+    <div id="app">
+      <style>
+        body {
+          background: #383838;
+          /*#e8ebf1;*/
+        }
+
+        /* .loading {
+          position: absolute;
+          width: 100%;
+          top: 50%;
+          margin-top: -99px;
+          text-align: center;
+          height: 198px;
+        }
+
+        @keyframes rotating {
+          0% {
+            transform: rotateZ(0);
+          }
+
+          100% {
+            transform: rotateZ(360deg);
+          }
+        }
+
+        .lds-gear {
+          animation: rotating 2s linear infinite;
+        } */
+        @keyframes round1 {
+          0% {
+            transform: rotate(0deg);
+          }
+          66.66% {
+            transform: rotate(360deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes round2 {
+          0% {
+            transform: rotate(0deg);
+          }
+          8.3325% {
+            transform: rotate(0deg);
+          }
+          74.9925% {
+            transform: rotate(360deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes round3 {
+          0% {
+            transform: rotate(0deg);
+          }
+          16.665% {
+            transform: rotate(0deg);
+          }
+          83.325% {
+            transform: rotate(360deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes round4 {
+          0% {
+            transform: rotate(0deg);
+          }
+          24.9975% {
+            transform: rotate(0deg);
+          }
+          91.635% {
+            transform: rotate(360deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes round5 {
+          0% {
+            transform: rotate(0deg);
+          }
+          33.33% {
+            transform: rotate(0deg);
+          }
+          100% {
+            transform: rotate(360deg);
+          }
+        }
+        @keyframes loading {
+          0% {
+            transform: rotate(0deg);
+            box-shadow: 25px 0px 0px -15px blue, 25px 0px 0px -15px green, 25px 0px 0px -15px red, 25px 0px 0px -15px yellow, 25px 0px 0px -15px palevioletred;
+          }
+          20% {
+            box-shadow: 25px 0px 0px -15px blue, 15.450849718747362px -47.55282581475768px 0px -15px green,
+              15.450849718747362px -47.55282581475768px 0px -15px red, 15.450849718747362px -47.55282581475768px 0px -15px yellow,
+              25px 0px 0px -15px palevioletred;
+          }
+          40% {
+            box-shadow: 25px 0px 0px -15px blue, 15.450849718747362px -47.55282581475768px 0px -15px green,
+              -40.45084971874737px -29.38926261462365px 0px -15px red, -40.45084971874737px -29.38926261462365px 0px -15px yellow,
+              25px 0px 0px -15px palevioletred;
+          }
+          60% {
+            box-shadow: 25px 0px 0px -15px blue, 15.450849718747362px -47.55282581475768px 0px -15px green,
+              -40.45084971874737px -29.38926261462365px 0px -15px red, -40.450849718747364px 29.38926261462366px 0px -15px yellow,
+              25px 0px 0px -15px palevioletred;
+          }
+          80% {
+            box-shadow: 25px 0px 0px -15px blue, 15.450849718747362px -47.55282581475768px 0px -15px green,
+              -40.45084971874737px -29.38926261462365px 0px -15px red, -40.450849718747364px 29.38926261462366px 0px -15px yellow,
+              25px 0px 0px -15px palevioletred;
+          }
+          100% {
+            transform: rotate(360deg);
+            /* box-shadow: 25px 0px 0px -15px blue,
+            15.450849718747373px 47.552825814757675px 0px -15px green,
+            -40.450849718747364px 29.38926261462366px 0px -15px red,
+            -40.45084971874737px -29.38926261462365px 0px -15px yellow,
+            15.450849718747362px -47.55282581475768px 0px -15px palevioletred; */
+            box-shadow: 25px 0px 0px -15px blue, 25px 0px 0px -15px green, 25px 0px 0px -15px red, 25px 0px 0px -15px yellow, 25px 0px 0px -15px palevioletred;
+          }
+        }
+        .container {
+          /* position: relative;
+          width: 100%;
+          height: 500px; */
+
+          position: absolute;
+          width: 100%;
+          top: 50%;
+          margin-top: -99px;
+          text-align: center;
+          height: 198px;
+        }
+        .loading {
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 25px;
+          height: 25px;
+          border-radius: 50%;
+          color: #04ffe4;
+          transform: rotate(90deg);
+        }
+        .subLoading {
+          border-radius: 50%;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          animation-duration: 6s;
+          animation-timing-function: ease-in-out;
+          animation-iteration-count: infinite;
+        }
+        .subLoading-1 {
+          box-shadow: 25px 0px 0px -5px;
+          animation-name: round1;
+        }
+        .subLoading-2 {
+          box-shadow: 25px 0px 0px -6px;
+          animation-name: round2;
+          /* box-shadow: 15.450849718747373px 47.552825814757675px 0px -15px green; */
+        }
+        .subLoading-3 {
+          box-shadow: 25px 0px 0px -7px;
+          animation-name: round3;
+          /* box-shadow: -40.450849718747364px 29.38926261462366px 0px -15px red; */
+        }
+        .subLoading-4 {
+          box-shadow: 25px 0px 0px -8px;
+          animation-name: round4;
+          /* box-shadow: -40.45084971874737px -29.38926261462365px 0px -15px yellow; */
+        }
+        .subLoading-5 {
+          box-shadow: 25px 0px 0px -9px;
+          animation-name: round5;
+
+          /* box-shadow: 15.450849718747362px -47.55282581475768px 0px -15px
+          palevioletred; */
+        }
+      </style>
+      <div class="container">
+        <div class="loading">
+          <div class="subLoading subLoading-1"></div>
+          <div class="subLoading subLoading-2"></div>
+          <div class="subLoading subLoading-3"></div>
+          <div class="subLoading subLoading-4"></div>
+          <div class="subLoading subLoading-5"></div>
+        </div>
+      </div>
+      <!-- <div class="loading">
+        <svg
+          class="lds-gear"
+          width="200px"
+          height="200px"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="xMidYMid"
+          style="background: none;"
+        >
+          <g transform="translate(50 50)">
+            <g transform="rotate(188.589)">
+              <path
+                d="M33.54101966249685 -10 L48.54101966249685 -10 L48.54101966249685 10 L33.54101966249685 10 A35 35 0 0 1 30.788150263128323 16.646014639397368 L30.788150263128323 16.646014639397368 L41.394751980926536 27.25261635719558 L27.25261635719559 41.39475198092653 L16.646014639397375 30.78815026312832 A35 35 0 0 1 9.999999999999998 33.54101966249685 L9.999999999999998 33.54101966249685 L10 48.54101966249685 L-9.999999999999991 48.54101966249685 L-9.999999999999993 33.54101966249685 A35 35 0 0 1 -16.64601463939737 30.78815026312832 L-16.64601463939737 30.78815026312832 L-27.252616357195585 41.39475198092653 L-41.39475198092653 27.252616357195585 L-30.78815026312832 16.646014639397375 A35 35 0 0 1 -33.54101966249685 10 L-33.54101966249685 10 L-48.54101966249685 10.000000000000002 L-48.54101966249685 -9.99999999999999 L-33.54101966249685 -9.999999999999991 A35 35 0 0 1 -30.788150263128323 -16.646014639397368 L-30.788150263128323 -16.646014639397368 L-41.394751980926536 -27.25261635719558 L-27.252616357195578 -41.394751980926536 L-16.646014639397364 -30.788150263128323 A35 35 0 0 1 -10.000000000000018 -33.541019662496836 L-10.000000000000018 -33.541019662496836 L-10.000000000000021 -48.541019662496836 L10 -48.54101966249684 L10.000000000000004 -33.54101966249684 A35 35 0 0 1 16.646014639397354 -30.78815026312833 L16.646014639397354 -30.78815026312833 L27.252616357195564 -41.39475198092654 L41.394751980926536 -27.25261635719558 L30.788150263128323 -16.646014639397368 A35 35 0 0 1 33.541019662496836 -10.00000000000002 M0 -20A20 20 0 1 0 0 20 A20 20 0 1 0 0 -20"
+                fill="#13ce66"
+              ></path>
+            </g>
+          </g>
+        </svg>
+      </div> -->
+    </div>
+
+    <!-- built files will be auto injected -->
+  </body>
+</html>

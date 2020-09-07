@@ -1,0 +1,232 @@
+html,
+body,
+#app {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+/**----------------------基本布局------------------------------*/
+
+.page-module {
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100%;
+}
+
+.module-content {
+  padding: $module-content-padding;
+  position: absolute;
+  width: 100%;
+  .module-content-close {
+    cursor: pointer;
+    position: absolute;
+    z-index: 1;
+    top: $module-content-padding + $spacing-large-size;
+    right: $module-content-padding + $spacing-large-size;
+  }
+  .panel {
+    .panel-title {
+      margin: 0;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      // font-size: $font-medium;
+      .title-name {
+        font-weight: bold;
+      }
+      .title-btn {
+        font-size: $font-small;
+      }
+    }
+  }
+}
+
+.module-content:fullscreen {
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+/**----------------------全屏面板------------------------------*/
+.panel:fullscreen,
+.panel:-webkit-full-screen,
+.panel:-moz-full-screen {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+.fullscreen {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: $full-screen-index;
+}
+/**----------------------面板下拉操作-----------------------*/
+
+.panel-more-dropdown {
+  cursor: pointer;
+}
+/**---------------------- 表单 ------------------------------*/
+.el-form {
+  &.valid-form {
+    .el-form-item {
+      margin-bottom: 1.5em;
+    }
+  }
+  .form-group {
+    .el-form-item {
+      margin-bottom: 1.5em;
+    }
+  }
+}
+
+/**----------------------菜单------------------------------*/
+
+/*---------------------------------------------------------*/
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.menu-popover-enter-active {
+  // transition: all .3s ease;
+  animation-duration: 0.5s;
+  animation-name: zoomIn; // animate.css
+}
+.menu-popover-leave-active {
+  animation-duration: 0.5s;
+  animation-name: zoomOut; // animate.css
+}
+.item-hover-animate {
+  &:hover {
+    animation: pulse 0.5s;
+    background: $element-success-color;
+    transition: background-color 0.5s ease 0s;
+    border-radius: 4px;
+  }
+}
+.menu-popover-enter, .menu-popover-leave-to
+/* .menu-popover-leave-active for below version 2.1.8 */ {
+  transform: translateX(10px);
+  opacity: 0;
+}
+.menu-popover {
+  $menu-width: 150px;
+  &.el-popover {
+    padding: 0;
+    min-width: auto;
+    &[x-placement^='right'] {
+      margin-left: $spacing-small-size; //
+    }
+    .el-menu {
+      width: $menu-width;
+      min-width: $menu-width;
+      .el-submenu {
+        width: $menu-width;
+        min-width: $menu-width;
+        .side-nav-node-name {
+          font-size: $font-small;
+          height: auto;
+          width: 100%;
+          padding-right: $spacing-large-size;
+          @include text-overflow();
+          visibility: visible;
+        }
+      }
+    }
+  }
+}
+.sidenav {
+  display: none;
+  overflow: auto;
+  position: absolute;
+  left: 0;
+  height: calc(100% - #{$header-height});
+  z-index: $sidenav-index;
+  width: $sidenav-width;
+  box-shadow: $box-shadow-sidenav;
+  font-size: $font-small;
+  .icon {
+    font-size: 20px;
+    vertical-align: middle;
+    margin-right: 0;
+    margin-bottom: 0.5em;
+  }
+  .side-nav-node {
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    .side-nav-node-popover,
+    .side-nav-node-nopopover {
+      display: inline-block;
+      width: 100%;
+      padding: $spacing-size * 2;
+    }
+    .side-nav-node-name {
+      display: block;
+      font-size: $font-small;
+    }
+    // & > .el-menu-item,
+    // & > .side-nav-node-popover .el-menu-item,
+    // & > .el-submenu .el-submenu__title {
+    //   height: auto;
+    //   line-height: 1;
+    //   text-align: center;
+    //   .icon {
+    //     margin-right: 0;
+    //     margin-bottom: 0.5em;
+    //   }
+    // }
+  }
+}
+
+.nav-collapse {
+  .caret {
+    transform: rotate(-90deg);
+  }
+  .sndnav {
+    display: none;
+  }
+}
+/**--------------------------分页栏----------------------------------*/
+.table-operate {
+  margin-top: $spacing-size;
+}
+/**----------------------固定式操作卡片------------------------------*/
+.box-card {
+  margin-bottom: $spacing-size;
+}
+
+/**----------------------自定义的操作按钮------------------------------*/
+.opt-btn-wrap {
+  .opt-btn {
+    cursor: pointer;
+    display: inline-block;
+    padding: 5px;
+    background-color: $border-grey;
+    &:hover {
+      background-color: darken($border-grey, 20%);
+    }
+  }
+  .prev-btn {
+  }
+  .next-btn {
+  }
+}
+
+.sidenav-close {
+  .sidenav {
+    display: block;
+    animation-duration: 0.5s;
+    animation-name: slideOutLeft; // animate.css
+    animation-fill-mode: forwards; // 动画结束后保持最后一帧的状态
+  }
+}
+.sidenav-open {
+  .sidenav {
+    display: block;
+    animation-duration: 0.5s;
+    animation-name: slideInLeft;
+  }
+}

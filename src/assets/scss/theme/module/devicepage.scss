@@ -1,0 +1,76 @@
+@mixin device-title($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  .panel {
+    .panel-title {
+      .device-option {
+        cursor: pointer;
+        color: $color;
+      }
+    }
+  }
+}
+@mixin device-contoller($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  .app-device-contoller {
+    // 配件控制
+    .accessory-contoller {
+      background-color: $cardColor;
+      color: $color;
+      .contoller-item.commn-contoller {
+        .contoller-value {
+          color: $color;
+        }
+      }
+    }
+    // 设备配件面板
+    .accessory-layout {
+      .control-layout {
+        background-color: $cardColor;
+        color: $color;
+      }
+    }
+    // 设备控制编辑面板
+    .edit-dialog {
+      .device_ctrl_panel_edit_title {
+        color: $color;
+      }
+    }
+    // 设备子系统
+    .deivce-sys {
+      .sys-title {
+        .btns:not(.el-icon-delete):hover {
+          color: $activeColor;
+        }
+      }
+    }
+  }
+}
+@mixin device-chart($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  .app-device-chart {
+    .device-chart {
+      background-color: $cardColor;
+    }
+  }
+}
+@mixin device-info-components($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  .device-info-components {
+    background-color: $bgColor;
+    &.app-device-input-data {
+      background-color: $cardColor;
+    }
+    .wrap,
+    .log-table {
+      background-color: $cardColor;
+    }
+  }
+}
+@mixin device-page-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  .module-content.app-device-info {
+    .text-title {
+      color: $color;
+      background-color: $bgColor;
+    }
+    @include device-title($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+    @include device-contoller($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+    @include device-chart($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+    @include device-info-components($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  }
+}

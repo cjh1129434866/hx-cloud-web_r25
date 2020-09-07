@@ -1,0 +1,132 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+*:focus {
+  outline: none !important;
+}
+
+body {
+  font: normal 14px/1 'Microsoft YaHei', 'Lantinghei SC', 'Open Sans', 'Hiragino Sans GB', 'WenQuanYi Micro Hei',
+    STHeiti, SimSun, Arial, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: normal;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+li {
+  list-style: none;
+}
+em {
+  font-style: normal;
+}
+
+strong {
+  font-weight: normal;
+}
+
+textarea {
+  resize: vertical;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  th {
+    font-weight: normal;
+  }
+}
+
+label {
+  font-weight: normal;
+  margin-bottom: 0;
+}
+input:-webkit-autofill,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  // 通过纯色的阴影覆盖底色,只适用于纯色背景的输入框
+  // -webkit-box-shadow: 0 0 0px 1000px white inset;
+  // -webkit-text-fill-color: #333;
+  // 通过设置input样式动画,
+  // 99999s 基本上就是一个无限长的时间,通过延长增加自动填充背景色的方式, 使用户感受不到样式的变化
+  -webkit-transition-delay: 99999s;
+  -webkit-transition: color 99999s ease-out, background-color 99999s ease-out;
+}
+.text-title {
+  // font-weight: bold;
+  @include flex-title-between;
+}
+.card-title {
+  @include flex-title-between;
+}
+.text-label {
+  display: inline-block;
+  padding-top: $spacing-size;
+}
+
+.text-link:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.text-line {
+  text-decoration: underline;
+}
+.click-btn {
+  cursor: pointer;
+  &.icon {
+    margin: 0;
+  }
+}
+.hover {
+  cursor: pointer;
+}
+
+.no-data {
+  width: 100%;
+  text-align: center;
+  padding: $spacing-size;
+}
+
+.vue-grid-layout {
+  .vue-grid-item {
+    // 强制清空 vue-grid-item 的定位属性，改为全屏定位
+    &.full {
+      width: 100% !important;
+      height: 100% !important;
+      position: fixed !important;
+      top: 0px !important;
+      z-index: 1 !important;
+      transform: none !important;
+    }
+  }
+}
+
+// flex 布局
+.flex-item {
+  display: flex;
+  &.flex-row {
+    flex-direction: row;
+  }
+  &.flex-col {
+    flex-direction: column;
+  }
+  &.flex-item-body {
+    width: 0;
+    flex-grow: 1;
+  }
+}

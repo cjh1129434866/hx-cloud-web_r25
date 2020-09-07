@@ -1,0 +1,21 @@
+/*------------------------ easy-scrollbar-----------------------------*/
+.easy-scrollbar {
+  &.sidenav-scrollbar,
+  &.content-scrollbar {
+    height: 100%; // calc(100% + #{$scrollbar-width} - #{$header-height});
+    .full-content {
+      // height: calc(100% - #{$header-height});
+      height: 100%;
+      padding: 0;
+    }
+    .easy-scrollbar__wrap {
+      height: 100%;
+      overflow-x: hidden;
+    }
+    .el-scrollbar__view {
+      height: 100%;
+      // 抵消 easy-scrollbar__wrap 中的负margin-bottom;
+      padding-bottom: $scrollbar-width; // 滚动条的宽度
+    }
+  }
+}

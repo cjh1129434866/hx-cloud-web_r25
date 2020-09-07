@@ -1,0 +1,233 @@
+$sub-panel-min-height: 200px;
+$panle-list-width: 350px + $spacing-size; // 左侧列表宽度
+$stat-width: 260px; // 右侧单个统计图宽度
+$panel-stat-width: ($stat-width + $spacing-size) * 2; // 右侧统计图宽度
+// > 1200px
+@media (min-width: 1200px) {
+  .dropmenu {
+    // 头部导航右侧操作按钮的自适应响应
+    .dropdown-item-button {
+      display: none;
+    }
+  }
+}
+// < 1200px ，当屏幕的宽度小于1200px时，把头部的操作按钮移到用户下拉列表中
+@media (max-width: 1200px) {
+  .page-frame {
+    .header {
+      .module-header-button {
+        .header-button {
+          display: none;
+        }
+      }
+    }
+  }
+  .dropmenu {
+    .dropdown-item-button {
+      display: block;
+    }
+  }
+  .module-content {
+    &.home-content {
+      .home-module.el-row {
+        .el-col {
+          &.panel-stat-wrap {
+            height: auto; // 由于屏幕小于1200px时，统计图会另起一行显示，为了防止出现双重滚动条，故使其高度自适应
+            .statistics-view-wrap {
+              .statistics-content {
+                .statistics-content-body {
+                  .statistic-info {
+                    max-height: none;
+                    min-height: auto;
+                  }
+                  .notice-view {
+                    height: 250px;
+                    min-height: auto;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// < 1024px ，当屏幕的宽度小于1024px时，隐藏路径
+@media (max-width: 1023px) {
+  .page-frame {
+    .header {
+      .path-breadcrumb {
+        display: none;
+      }
+    }
+  }
+  .dropmenu {
+    .dropdown-item-button {
+      display: block;
+    }
+  }
+  .header {
+    .module-header-button {
+      .header-button {
+        display: none;
+      }
+    }
+  }
+}
+
+// ------------- 首页三列布局自适应 ------------------
+
+// < 768px Mobile，当屏幕小于768px时候，首页一列显示
+@media (max-width: 767px) {
+  // 页面布局
+  .page-frame {
+    // 头部
+    .header {
+      // 当屏幕的宽度小于768px时，隐藏用户名
+      .module-header-button .operate .account .account-info {
+        display: none;
+      }
+    }
+    // 内容
+    .frame-content {
+      .page-module {
+        .module-content {
+          padding: 10px;
+        }
+      }
+    }
+  }
+  .module-content {
+    // 首页
+    &.home-content {
+      .home-module.el-row {
+        .el-col {
+          &.panel-list-wrap {
+            height: auto; // 列表外部高度根据内容决定，即不让 EasyScrollbar 出现滚动条
+          }
+          &.panel-stat-wrap {
+            .panel-statistics-view.el-row {
+              .el-col {
+                // width: 50%;
+                @include count_panel-statistics-view_height(767px);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// >=768px  iPad(768*1024)，当屏幕大于768px时，最下方的统计图分两列显示
+@media (min-width: 768px) {
+  .module-content {
+    &.home-content {
+      .home-module.el-row {
+        .el-col {
+          &.panel-stat-wrap {
+            .panel-statistics-view.el-row {
+              .el-col {
+                // width: 50%;
+                @include count_panel-statistics-view_height(768px);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// >= 1024px iPad Pro(1024*1366)，当屏幕大于1024时，首页两列显示（左侧固定宽度，中间内容宽度自适应），统计图另起一行显示
+@media (min-width: 1024px) {
+  .module-content {
+    &.home-content {
+      .home-module.el-row {
+        .el-col {
+          &.panel-list-wrap {
+            width: $panle-list-width;
+          }
+          &.panel-content-wrap {
+            width: calc(100% - #{$panle-list-width});
+          }
+          &.panel-stat-wrap {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}
+// >= 1200px Window，当屏幕大于1200px时，分三列显示（左:中:右 = 19:53:28）,同时右侧统计图改为单列显示
+@media (min-width: 1200px) {
+  .module-content {
+    &.home-content {
+      // 首页
+      .home-module.el-row {
+        .el-col {
+          // 首页-左侧列表
+          &.panel-list-wrap {
+            width: 19%;
+          }
+          // 首页-中间内容（地图、图片、视频、设备控制...）
+          &.panel-content-wrap {
+            width: 53%;
+          }
+          // 首页-右侧统计图
+          &.panel-stat-wrap {
+            width: 28%;
+            .panel-statistics-view.el-row {
+              .el-col {
+                // width: 100%;
+                @include count_panel-statistics-view_height(1200px);
+                // 最后一个是奇数
+                // &:nth-of-type(odd):last-child {
+                //   padding-bottom: 0;
+                // }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// >= 1360px，当屏幕大于1360px时，右侧统计图分两列显示
+@media (min-width: 1361px) {
+  .module-content {
+    &.home-content {
+      .home-module.el-row {
+        .el-col {
+          &.panel-stat-wrap {
+            .panel-statistics-view.el-row {
+              .el-col {
+                // width: 50%;
+                @include count_panel-statistics-view_height(1361px);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// // >= 1920px,当屏幕大于等于1920px，左(350≈1920*19%)右(520=260*2≈1920*28%)两侧固定宽度，中间内容宽度自适应
+// @media (min-width: 1920px) {
+//   .module-content {
+//     &.home-content {
+//       .home-module.el-row {
+//         .el-col {
+//           &.panel-list-wrap {
+//             width: $panle-list-width;
+//           }
+//           &.panel-content-wrap {
+//             width: calc(100% - #{$panle-list-width + $panel-stat-width});
+//           }
+//           &.panel-stat-wrap {
+//             width: $panel-stat-width;
+//           }
+//         }
+//       }
+//     }
+//   }
+// }

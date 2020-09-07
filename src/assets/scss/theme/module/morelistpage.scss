@@ -1,0 +1,106 @@
+/*
+ * @Author: jiapeng.Zheng
+ * @Date: 2019-07-12 10:07:29
+ * @LastEditors: jiapeng.Zheng
+ * @LastEditTime: 2019-09-26 17:07:06
+ * @Description: 查看更多页面颜色修改
+ */
+// 查看更多页面
+@mixin more-list-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  $diveListModule: map-get($modules, 'dive-list');
+  $typeWrapColor: map-get($diveListModule, 'type-wrap');
+  $icon-module: map-get($modules, 'icon');
+  $disabledIconColor: map-get($icon-module, 'disabled');
+
+  @if $diveListModule == null {
+    @warn "miss '$diveListModule' arg";
+  }
+  @if $typeWrapColor == null {
+    @warn "miss '$typeWrapColor' arg";
+  }
+
+  // 项目/站场/设备 列表
+  .app-project,
+  .app-device {
+    &.data-list-wrap {
+      .data-list {
+        .data-item-wrap {
+          border: 2px solid $borderColor;
+          box-shadow: $box-shadow;
+          &:hover {
+            border-color: $activeColor;
+          }
+          .data-item {
+            background-color: $subCardColor;
+            color: $color;
+            .item-content {
+              .content-title {
+                color: $color;
+              }
+              .content-body {
+                .icons,
+                .num {
+                  color: $activeColor;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .app-device {
+    .data-list-title {
+      .data-list-search {
+        .el-icon-picture {
+          cursor: pointer;
+          color: $color;
+        }
+      }
+    }
+    .data-list {
+      // 类型
+      .data-type {
+        background-color: $typeWrapColor;
+        color: $color;
+        .icon {
+          color: $activeColor;
+        }
+      }
+      .data-item-wrap {
+        .data-item {
+          .item-content {
+            color: $color;
+            .data-item-adr .icon {
+              color: $activeColor;
+            }
+            .data-item-ctrl {
+              color: $disabledIconColor; // $color;
+              .control-on {
+                color: $activeColor;
+              }
+            }
+          }
+          // 设备在线
+          &.onLine {
+            .item-content {
+              .data-item-title {
+                color: $activeColor;
+              }
+            }
+          }
+          // 设备离线
+          &.offLine {
+            .item-content {
+              .data-item-ctrl {
+                .control-on {
+                  color: $disabledIconColor; // $color;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,163 @@
+/*
+ * @Author: jiapeng.Zheng 
+ * @Date: 2019-07-12 10:51:46 
+ * @Last Modified by: jiapeng.Zheng
+ * @Last Modified time: 2019-07-12 10:52:57
+ * @Description: 默认的主题（与主题相关的文件禁止包含会影响页面布局的属性，只允许更改颜色
+ */
+@import '../variables';
+@import './module/index';
+
+@mixin header-nav-theme($head-color, $head-hover-bgcolor, $head-bgcolor) {
+  // 左侧菜单导航
+  .sidenav,
+  .header {
+    background-color: $head-bgcolor;
+    color: $head-color;
+  }
+  // 头部颜色样式
+  .header {
+    // 头部导航
+    .path-breadcrumb {
+      .el-breadcrumb {
+        .el-breadcrumb__item {
+          .el-breadcrumb__item__inner,
+          .el-breadcrumb__separator {
+            color: $head-color;
+          }
+        }
+      }
+    }
+    // 头部右侧操作按钮
+    ul.module-header-button {
+      li {
+        &.active,
+        &:hover {
+          background-color: $head-hover-bgcolor;
+        }
+        .header-icon-wrap {
+          color: $head-color;
+        }
+      }
+    }
+  }
+  // 左侧导航
+  .sidenav {
+    .side-nav-node {
+      &:hover {
+        background-color: $head-hover-bgcolor;
+      }
+    }
+  }
+  // 左侧菜单hover时的弹出窗样式
+  .el-popover.menu-popover {
+    border-color: $head-bgcolor;
+    background-color: $head-bgcolor;
+    color: $head-color;
+    &[x-placement^='right'] {
+      .popper__arrow {
+        border-right-color: $head-bgcolor;
+        &::after {
+          border-right-color: $head-bgcolor;
+        }
+      }
+    }
+    &[x-placement^='left'] {
+      .popper__arrow {
+        border-left-color: $head-bgcolor;
+        &::after {
+          border-left-color: $head-bgcolor;
+        }
+      }
+    }
+    &[x-placement^='top'] {
+      .popper__arrow {
+        border-top-color: $head-bgcolor;
+        &::after {
+          border-top-color: $head-bgcolor;
+        }
+      }
+    }
+    &[x-placement^='bottom'] {
+      .popper__arrow {
+        border-bottom-color: $head-bgcolor;
+        &::after {
+          border-bottom-color: $head-bgcolor;
+        }
+      }
+    }
+    .el-menu {
+      .el-submenu {
+        border-color: $head-bgcolor;
+        background-color: $head-bgcolor;
+        color: $head-color;
+        &:hover{
+          background-color: $head-hover-bgcolor;
+        }
+      }
+    }
+  }
+}
+
+@mixin common-module-theme() {
+  // 面板
+  .panel.panel-block {
+    padding: $spacing-medium-size;
+  }
+  // 首页-左侧列表
+  .panel.panel-block.panel-list {
+    .panel-title {
+      .body-item-search,
+      .title-item-wrap {
+        box-shadow: $box-shadow-wrap;
+      }
+      // 标题-分类
+      .title-item-wrap {
+        .title-item {
+          .item-icon {
+            color: $white;
+          }
+        }
+      }
+    }
+  }
+  // 自定义滚动条
+  .easy-scrollbar {
+    .esay-scrollbar__bar {
+      background-color: transparent !important;
+    }
+  }
+  // 首页-设备-图片/视频切换按钮
+  .content-media {
+    .media-switch-btn {
+      & > span {
+        color: black;
+        background: $white;
+        &.active,
+        &:hover {
+          cursor: pointer;
+          color: $white;
+        }
+      }
+    }
+  }
+}
+
+// 系统默认的主题
+.themem {
+  // ------------------------------------ 所有主题都共用的样式 -----------------------
+  @include common-module-theme();
+  @include header-nav-theme($head-color, $head-hover-bgcolor, $head-bgcolor);
+  // ------------------------------------ 引用默认主题 -----------------------
+  @include theme-style(
+    $theme-base-activeFontColor,
+    $theme-base-activeBgHasFont,
+    $theme-base-activeBtn,
+    $theme-base-fontColor,
+    $theme-base-bgColor,
+    $theme-base-cardColor,
+    $theme-base-subCardColor,
+    $theme-base-border,
+    $theme-base-modules
+  );
+}

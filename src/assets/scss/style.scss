@@ -1,0 +1,19 @@
+//------------------基本的样式-------------------------
+// @import 'bootstrap4/bootstrap.scss'; // bootstrap样式
+@import 'variables.scss'; // scss 变量
+@import 'mixins.scss'; // scss mixin
+@import 'Ianimate.scss'; // scss mixin
+@import 'common.scss'; // css 初始化
+//-------------------布局样式----------------
+@import 'frame.scss';
+//-------------------自定义组件样式----------------
+@import 'easyScrollbar.scss'; // 自定义滚动条样式(easyScrollbar)样式
+@import 'icon.scss'; // 自定义icon控件(svg)样式
+@import 'tableList.scss'; // 列表样式
+@import 'amap.scss'; // 高德地图样式
+//-------------------皮肤样式---------------
+@import 'theme-element.scss'; // elementUI 样式
+@import 'theme/base.scss'; // 默认的皮肤布局样式
+@import 'theme/dark.scss'; // 自定义皮肤1样式（dark风格）
+// --------------- 响应式布局 --------------
+@import 'response.scss'; // 自定义皮肤1样式（dark风格）

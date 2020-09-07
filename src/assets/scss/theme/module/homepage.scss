@@ -1,0 +1,411 @@
+/*
+ * @Author: jiapeng.Zheng
+ * @Date: 2019-07-12 09:53:11
+ * @LastEditors  : jiapeng.Zheng
+ * @LastEditTime : 2020-03-26 11:46:06
+ * @Description: 首页颜色修改
+ */
+// 首页-左侧列表
+@mixin home-list-theme($activeColor, $activeColorHasFont, $activeBtn, $subCardColor, $borderColor, $module) {
+  $searchIconColor: map-get($module, 'search-icon');
+  $typeIconColor: map-get($module, 'type-icon');
+  $itemIconColor: map-get($module, 'item-icon');
+  $itemFontColor: map-get($module, 'item-font');
+  $border: map-get($module, 'border');
+
+  @if $searchIconColor == null {
+    @warn "miss '$searchIconColor' arg";
+  }
+  @if $typeIconColor == null {
+    @warn "miss '$typeIconColor' arg";
+  }
+  @if $itemIconColor == null {
+    @warn "miss '$itemIconColor' arg";
+  }
+  @if $itemFontColor == null {
+    @warn "miss '$itemFontColor' arg";
+  }
+  @if $border == null {
+    @warn "miss '$border' arg";
+  }
+
+  .panel-list-wrap {
+    // 首页列表标题
+    .panel-title {
+      // 标题-搜索框
+      .body-item-search {
+        .el-input__inner {
+          background-color: $subCardColor;
+        }
+        span {
+          color: $searchIconColor;
+          &:first-child::after {
+            background-color: $border;
+          }
+          .icon {
+            &:hover {
+              color: $activeColor;
+            }
+          }
+        }
+      }
+
+      // 标题-分类
+      .title-item-wrap {
+        background-color: $subCardColor;
+        .title-item {
+          &.active,
+          &:hover {
+            .item-name {
+              color: $activeColor;
+            }
+            .item-icon {
+              background: $activeBtn;
+            }
+          }
+          .item-icon {
+            background: $typeIconColor;
+          }
+        }
+      }
+      // 标题-名称
+      .title-name-wrap {
+        box-shadow: none;
+        .title-name {
+          .go-back-btn {
+            cursor: pointer;
+            &:hover {
+              color: $activeColor;
+            }
+          }
+        }
+        .more-btn {
+          cursor: pointer;
+          color: $activeColor;
+        }
+      }
+    }
+    // 首页列表内容
+    .panel-body {
+      .body-item {
+        cursor: pointer;
+        border-color: $borderColor;
+        .map-mark-icon {
+          &::before {
+            background: $itemIconColor;
+          }
+          &::after {
+            border-top-color: $itemIconColor;
+          }
+        }
+        .body-item-name {
+          color: $itemFontColor;
+        }
+        &.active,
+        &.hover,
+        &:hover {
+          // color: $activeColor;
+          .map-mark-icon {
+            &::before {
+              background: $activeColorHasFont;
+            }
+            &::after {
+              border-top-color: $activeColorHasFont;
+            }
+          }
+          .body-item-name {
+            color: $activeColor;
+          }
+        }
+        .el-tag {
+          color: #fff;
+          border: none;
+          background-color: $typeIconColor; // disable
+        }
+        &.isOnline {
+          .el-tag {
+            background-color: $activeColorHasFont;
+            border-color: $activeColorHasFont;
+          }
+        }
+        &.isOnline.isWarn {
+          .el-tag {
+            background-color: $element-warning-color;
+            border-color: $element-warning-color;
+          }
+        }
+      }
+    }
+  }
+}
+
+// 首页-中间内容-媒体（地图、图片、视频）
+@mixin device-media($cardColor, $activeBtn) {
+  // 中间内容-图片/视频切换按钮
+  .content-media {
+    background-color: $cardColor;
+    .media-switch-btn {
+      & > span {
+        &.active,
+        &:hover {
+          background: $activeBtn;
+        }
+      }
+    }
+    .el-carousel {
+      .el-carousel__item {
+        background-color: $cardColor;
+      }
+    }
+  }
+}
+// 首页-中间内容-设备控制
+@mixin device-control($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $module) {
+  $btnFontColor: map-get($module, 'btn-font');
+  $ctrlBtnFontUnactiveColor: map-get($module, 'ctrl-btn-font-unactive');
+  $ctrlBtnUnactiveColor: map-get($module, 'ctrl-btn-unactive');
+  $tabItemColor: map-get($module, 'tab-item');
+  $moduleBorderColor: map-get($module, 'border');
+  @if $btnFontColor == null {
+    @warn "'device-control' mixin miss '$btnFontColor' arg";
+  }
+  @if $ctrlBtnFontUnactiveColor == null {
+    @warn "'device-control' mixin miss '$ctrlBtnFontUnactiveColor' arg";
+  }
+  @if $ctrlBtnUnactiveColor == null {
+    @warn "'device-control' mixin miss '$ctrlBtnUnactiveColor' arg";
+  }
+  @if $tabItemColor == null {
+    @warn "'device-control' mixin miss '$tabItemColor' arg";
+  }
+  @if $moduleBorderColor == null {
+    @warn "'device-control' mixin miss '$moduleBorderColor' arg";
+  }
+  // 设备控制
+  .device-control {
+    // 设备控制-模块
+    .module {
+      background-color: $subCardColor;
+      // 1、设备控制-模块（“首页”模块）
+      // 2、设备控制-模块（“工艺”模块）
+      // 3、设备控制-模块（“模式”模块）
+      .control-mode {
+        .el-tabs__header {
+          background-color: $tabItemColor;
+          border-color: $tabItemColor;
+          .el-tabs__item {
+            color: $ctrlBtnFontUnactiveColor;
+            &.is-active,
+            &:hover {
+              color: $activeColor;
+            }
+          }
+        }
+        .tab-pane-title {
+          border-bottom-color: $moduleBorderColor;
+          // 控制按钮
+          .control-btn:not(.active, :hover) {
+            background: $subCardColor;
+            box-shadow: none;
+          }
+        }
+        // 3-1、设备控制-模块（“模式”模块）-运行模式（“调试”模式）
+        // 3-2、设备控制-模块（“模式”模块）-运行模式（“自动运行”模式）
+        // 3-3、设备控制-模块（“模式”模块）-运行模式（“自定义运行”模式）
+        .custom-run-model {
+          .accessory-item-wrap {
+            .accessory-item {
+              border-bottom-color: $moduleBorderColor;
+              .accessory-name-wrap {
+                .accessory-name-icon {
+                  color: $text-grey;
+                }
+              }
+              .accessory-control {
+                .control-item {
+                  border-right-color: $moduleBorderColor;
+                  .control-item-name {
+                    color: $activeColor;
+                  }
+                }
+              }
+            }
+          }
+        }
+        // 3-4、设备控制-模块（“模式”模块）-运行模式（“检修”模式）
+        // 自定义运行下的启动按钮
+        .run-btn,
+        // 控制按钮
+        .control-btn {
+          background: $ctrlBtnUnactiveColor;
+          color: $ctrlBtnFontUnactiveColor;
+          &.active,
+          &:hover {
+            background: $activeBtn;
+            color: $btnFontColor;
+          }
+        }
+      }
+      // 4、设备控制-模块（“报警”模块）
+    }
+    // 设备控制-模块切换Tab
+    .module-tab {
+      border-top-color: $tabItemColor;
+      .tab-item {
+        background-color: $tabItemColor;
+        color: $color;
+        &.active,
+        &:hover {
+          background: $activeBtn;
+          color: $btnFontColor;
+        }
+      }
+    }
+  }
+}
+// 首页-中间内容
+@mixin home-content-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $module) {
+  .panel-content-wrap {
+    .panel {
+      background-color: $bgColor;
+      // 中间内容布局
+      .home-content {
+        & > div {
+          background-color: $bgColor;
+        }
+        @include device-media($cardColor, $activeBtn);
+        @include device-control($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $module);
+      }
+    }
+  }
+}
+// 首页-右侧内容（统计）
+@mixin home-stats-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $module) {
+  .statistics-view-wrap {
+    // 标题
+    .statistics-title {
+      background-color: $cardColor;
+      .title-name {
+        color: $activeColor;
+      }
+    }
+    // 新增窗口
+    .add-dialog-wrap {
+      .add-dialog {
+        background-color: $bgColor;
+        .title-tab {
+          &::before {
+            background-color: $subCardColor;
+          }
+          .tab-item {
+            &::before {
+              background-color: $subCardColor;
+            }
+            &.actived {
+              &::before {
+                background-color: #3d3d40;
+                box-shadow: 5px 5px 5px rgba($bgColor, 0.3);
+              }
+            }
+            &.actived,
+            &:hover {
+              .tab-item-icon,
+              .tab-item-name {
+                color: $activeColor;
+              }
+            }
+          }
+        }
+        .el-dialog__headerbtn {
+          &::before {
+            background-color: $subCardColor;
+          }
+        }
+        .dialog-content-wrap {
+          .dialog-content {
+            .el-checkbox {
+              &:hover {
+                .stats-name {
+                  color: $activeColor;
+                }
+              }
+            }
+          }
+        }
+        .footer-btns {
+          .save-btn {
+            border: none;
+            color: white;
+            background: $activeBtn;
+          }
+        }
+      }
+    }
+    // 统计信息
+    .statistic-info {
+      .info-card {
+        // background-color: $cardColor;
+        .card-background-icon {
+          background-color: $subCardColor;
+        }
+        .card-background {
+          background-color: $cardColor;
+        }
+        .card-title {
+          .icon {
+            border-color: $borderColor;
+          }
+        }
+        .card-content {
+          .content-item {
+            .item-value {
+              color: $activeColor;
+            }
+          }
+        }
+      }
+    }
+    // 报警通知
+    .notice-view {
+      background-color: $cardColor;
+      .el-tabs__header {
+        background-color: $bgColor;
+        .el-tabs__item.is-active {
+          font-size: $font-medium;
+        }
+      }
+      .el-tabs__content {
+        height: 100%;
+        .el-tab-pane {
+          height: 100%;
+        }
+      }
+      .notice-table {
+        background-color: $cardColor;
+        .notice-item {
+          &:hover {
+            color: $activeColor;
+          }
+        }
+      }
+    }
+  }
+}
+// 首页
+@mixin home-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  .module-content {
+    .home-module {
+      $home-list-module: map-get($modules, 'home-list');
+      $home-content-module: map-get($modules, 'home-content');
+      @if $home-list-module == null {
+        @warn "miss '$home-list-module' arg";
+      }
+      @if $home-content-module == null {
+        @warn "miss '$home-content-module' arg";
+      }
+      @include home-list-theme($activeColor, $activeColorHasFont, $activeBtn, $subCardColor, $borderColor, $home-list-module);
+      @include home-content-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $home-content-module);
+      @include home-stats-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $home-content-module);
+    }
+  }
+}

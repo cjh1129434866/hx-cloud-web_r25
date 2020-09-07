@@ -1,0 +1,20 @@
+{
+  "name": "村镇污水处理管理云平台",
+  "short_name": "H X W",
+  "icons": [
+    {
+      "src": "/img/icons/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/img/icons/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#50A135",
+  "theme_color": "#50A135"
+}

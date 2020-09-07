@@ -1,0 +1,33 @@
+/*
+ * @Author: jiapeng.Zheng
+ * @Date: 2019-07-12 09:25:21
+ * @LastEditors: jiapeng.Zheng
+ * @LastEditTime: 2019-08-01 16:08:10
+ * @Description: 引用各个需要变更颜色的模块
+ * @Description: 与主题相关的文件禁止包含会影响页面布局的属性，只允许更改颜色
+ */
+
+@import './element';
+@import './frame';
+@import './homepage';
+@import './morelistpage';
+@import './devicepage';
+@import './userInfo';
+@import './components';
+
+@mixin theme-style($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  // element-ui
+  @include element-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  // 框架
+  @include frame-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  // 主页
+  @include home-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  // 自定义的组件
+  @include components-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  // 项目/站场/设备 列表
+  @include more-list-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  // 设备详情页
+  @include device-page-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  // 个人信息
+  @include user-info-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+}

@@ -1,0 +1,674 @@
+/*
+ * @Author: jiapeng.Zheng
+ * @Date: 2019-07-12 09:42:57
+ * @LastEditors  : jiapeng.Zheng
+ * @LastEditTime : 2020-04-07 11:27:50
+ * @Description: 自定义的 Element UI
+ */
+@mixin element-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  $elementModule: map-get($modules, 'element');
+  $inputBorder: map-get($elementModule, 'inputBorder');
+  $inputGroupBg: map-get($elementModule, 'inputGroupBg');
+  $inputPlaceholder: map-get($elementModule, 'inputPlaceholder');
+  $tableThColor: map-get($elementModule, 'tableTh');
+  $checkboxUnActivedColor: map-get($elementModule, 'checkboxUnActived');
+
+  @if $elementModule == null {
+    @warn "'element-theme' mixin miss '$elementModule' arg";
+  }
+  @if $inputBorder == null {
+    @warn "'element-theme' mixin miss '$inputBorder' arg";
+  }
+  @if $inputGroupBg == null {
+    @warn "'element-theme' mixin miss '$inputGroupBg' arg";
+  }
+  @if $inputPlaceholder == null {
+    @warn "'element-theme' mixin miss '$inputPlaceholder' arg";
+  }
+  @if $tableThColor == null {
+    @warn "'element-theme' mixin miss '$tableThColor' arg";
+  }
+  @if $checkboxUnActivedColor == null {
+    @warn "'element-theme' mixin miss '$checkboxUnActivedColor' arg";
+  }
+
+  .el-progress {
+    &:not(.is-exception) {
+      .el-progress-bar__inner {
+        background-color: $activeColor;
+      }
+    }
+    .el-progress-bar__outer {
+      background-color: $bgColor;
+    }
+  }
+
+  .el-switch {
+    &.is-checked .el-switch__core {
+      border-color: $activeColorHasFont;
+      background-color: $activeColorHasFont;
+    }
+  }
+
+  .el-input {
+    input {
+      color: $color;
+      font-size: $font-default;
+      &::-webkit-input-placeholder {
+        color: $inputPlaceholder;
+      }
+    }
+    .el-input-group__append,
+    .el-input-group__prepend {
+      background-color: $inputGroupBg;
+      border-color: $inputBorder;
+      color: $color;
+    }
+    .el-input__inner {
+      background-color: $cardColor;
+      border-color: $inputBorder;
+      &:focus,
+      &:hover {
+        border-color: $activeColor;
+      }
+    }
+    .el-input__count {
+      .el-input__count-inner {
+        background: $cardColor;
+      }
+    }
+  }
+  .el-input-number {
+    .el-input-number__decrease {
+      border-right-color: $borderColor;
+    }
+    .el-input-number__increase {
+      border-left-color: $borderColor;
+    }
+    .el-input-number__decrease,
+    .el-input-number__increase {
+      background: $subCardColor;
+      &:hover {
+        color: $activeColor;
+        &:not(.is-disabled) ~ .el-input .el-input__inner:not(.is-disabled) {
+          border-color: $activeColor;
+        }
+      }
+    }
+    // .el-input-number__decrease:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled),
+    // .el-input-number__increase:hover:not(.is-disabled)~.el-input .el-input__inner:not(.is-disabled)
+    // .el-input-number__decrease:hover,
+    // .el-input-number__increase:hover {
+    //   color: $activeColor;
+    // }
+  }
+
+  .el-textarea {
+    .el-textarea__inner {
+      background-color: $cardColor;
+      color: $color;
+      border-color: $borderColor;
+      &:focus {
+        border-color: $activeColor;
+      }
+    }
+  }
+
+  .el-select-dropdown {
+    background-color: $subCardColor;
+    border-color: $subCardColor;
+    .el-select-dropdown__item {
+      color: $color;
+      &.selected {
+        color: $activeColor;
+      }
+      // &.selected,
+      &.hover,
+      &:hover {
+        background-color: $bgColor;
+      }
+    }
+  }
+
+  .el-time-panel {
+    background-color: $cardColor;
+    border-color: $cardColor;
+    .el-time-spinner__item.active:not(.disabled) {
+      color: $activeColorHasFont;
+    }
+    .el-time-spinner__item:hover:not(.disabled):not(.active) {
+      background-color: $activeColorHasFont;
+      color: white;
+    }
+    .el-time-panel__btn {
+      &.cancel {
+        color: $color;
+      }
+      &.confirm {
+        color: $activeColor;
+      }
+    }
+  }
+
+  .el-date-editor.el-input__inner {
+    background-color: $cardColor;
+    border-color: $inputBorder;
+    .el-range-input {
+      background-color: $cardColor;
+      border-color: $inputBorder;
+    }
+    .el-range-input,
+    .el-range-separator {
+      color: $color;
+    }
+  }
+
+  // 日期选择面板
+  .el-picker-panel {
+    background-color: $cardColor;
+    border-color: $borderColor;
+    .el-picker-panel__icon-btn {
+      color: $color;
+    }
+    .el-date-picker__time-header {
+      border-color: $borderColor;
+    }
+    .el-date-picker__header-label.active,
+    .el-date-picker__header-label:hover,
+    .el-picker-panel__icon-btn:hover {
+      color: $activeColor;
+    }
+    // .el-date-table td.today:not(.disabled) {
+    //   span {
+    //     color: $activeColorHasFont;
+    //   }
+    //   &:before {
+    //     border-top-color: $activeColorHasFont;
+    //   }
+    // }
+    .el-date-table td {
+      &.today span {
+        color: $activeColorHasFont;
+      }
+      &.disabled:not(.in-range) {
+        div {
+          background-color: $subCardColor;
+        }
+      }
+    }
+    .el-date-table td.available:hover {
+      color: $activeColorHasFont;
+    }
+
+    .el-month-table td.disabled .cell,
+    .el-year-table td.disabled .cell {
+      background-color: $subCardColor;
+    }
+    .el-month-table td:not(.disabled) .cell:hover,
+    .el-month-table td.current:not(.disabled) .cell,
+    .el-year-table td:not(.disabled) .cell:hover,
+    .el-year-table td.current:not(.disabled) .cell {
+      color: $activeColorHasFont;
+    }
+    .el-date-table td.current:not(.disabled),
+    .el-date-table td.end-date,
+    .el-date-table td.start-date {
+      span {
+        background-color: $activeColorHasFont;
+        color: #fff;
+      }
+    }
+    // 左侧快捷选项
+    .el-picker-panel__sidebar {
+      background-color: $cardColor;
+      border-color: $borderColor;
+      .el-picker-panel__shortcut {
+        color: $color;
+        &:hover {
+          color: $activeColor;
+        }
+      }
+    }
+    .el-picker-panel__footer {
+      background-color: $cardColor;
+      border-color: $borderColor;
+      .el-picker-panel__link-btn {
+        color: $activeColor;
+        &.is-plain {
+          border-color: $activeColorHasFont;
+          background-color: $activeColorHasFont;
+          color: #fff;
+        }
+      }
+      // .el-picker-panel__btn {
+      //   color: $color;
+      //   border-color: $borderColor;
+      // }
+    }
+  }
+
+  .el-button {
+    &.el-button--default.is-plain {
+      // background-color: $activeColorHasFont;
+      border-color: $activeColorHasFont;
+      color: $activeColorHasFont;
+      &:focus,
+      &:hover {
+        border-color: $activeColor;
+        color: $activeColor;
+      }
+    }
+    &.el-button--primary {
+      background-color: $activeColorHasFont;
+      border-color: $activeColorHasFont;
+      &:hover {
+        background-color: rgba($activeColorHasFont, 0.8);
+        border-color: rgba($activeColorHasFont, 0.8);
+      }
+    }
+    &.el-button--text {
+      color: $activeColor;
+    }
+  }
+
+  .el-radio-group {
+    .el-radio {
+      color: $color;
+      .el-radio__input.is-checked .el-radio__inner {
+        border-color: $activeColor;
+        background: $activeColor;
+      }
+      .el-radio__input.is-checked + .el-radio__label {
+        color: $activeColor;
+      }
+    }
+  }
+
+  .el-radio-button {
+    &:first-child .el-radio-button__inner {
+      border-left-color: $activeColorHasFont;
+    }
+    .el-radio-button__orig-radio:checked + .el-radio-button__inner {
+      background-color: $activeColorHasFont;
+      border-color: $activeColorHasFont;
+      box-shadow: -1px 0 0 0 $activeColorHasFont;
+      color: #fff;
+      &:hover {
+        color: #fff;
+      }
+    }
+    .el-radio-button__inner {
+      color: $color;
+      border-color: $activeColorHasFont;
+      &:hover {
+        color: $activeColor;
+      }
+    }
+  }
+
+  .el-checkbox {
+    color: $checkboxUnActivedColor;
+    .el-checkbox__input.is-checked .el-checkbox__inner {
+      background-color: $activeColorHasFont;
+      border-color: $activeColorHasFont;
+    }
+    .el-checkbox__input.is-checked + .el-checkbox__label {
+      color: $color;
+    }
+  }
+
+  .el-pagination:not(.is-background) {
+    color: $color;
+    .btn-prev,
+    .btn-next {
+      background-color: $cardColor;
+      &:not(:disabled) {
+        color: $color;
+        &:hover {
+          color: $activeColorHasFont;
+        }
+      }
+      // &:disabled{
+
+      // }
+    }
+    .el-pager {
+      li {
+        border-color: $cardColor;
+        background-color: $cardColor;
+        &:hover,
+        &.active {
+          color: $activeColorHasFont;
+        }
+      }
+    }
+  }
+
+  .el-pagination.is-background {
+    color: $color;
+    .el-pager {
+      li {
+        border-color: $cardColor;
+        background-color: $cardColor;
+        &.active {
+          border-color: $activeColorHasFont;
+          background-color: $activeColorHasFont;
+          &:hover {
+            color: $white;
+          }
+        }
+        &:hover {
+          color: $activeColor;
+        }
+      }
+    }
+    button {
+      background-color: $cardColor;
+      border-color: $cardColor;
+      &:hover {
+        color: $activeColor;
+      }
+    }
+    .el-pagination__editor {
+      background-color: $cardColor;
+      &:focus {
+        border-color: $activeColor;
+      }
+    }
+  }
+
+  .el-tabs {
+    // 控制模式
+
+    .el-tabs__header {
+      border-color: $borderColor;
+      .el-tabs__nav-wrap::after {
+        background: none;
+      }
+      .el-tabs__nav {
+        border-color: $borderColor;
+      }
+      .el-tabs__active-bar {
+        background-color: $activeColor;
+      }
+      .el-tabs__item {
+        color: inherit;
+        border-color: inherit;
+        &:hover {
+          color: $activeColor;
+        }
+        &.is-active {
+          color: $activeColor;
+          border-color: $borderColor;
+          border-bottom-color: $cardColor;
+        }
+      }
+    }
+  }
+
+  .el-dialog {
+    // background: $subCardColor;
+    background-color: $cardColor;
+
+    .el-dialog__header {
+      .el-dialog__title {
+        color: $color;
+      }
+      .el-dialog__headerbtn:focus .el-dialog__close,
+      .el-dialog__headerbtn:hover .el-dialog__close {
+        color: $activeColor;
+      }
+    }
+
+    .el-dialog__body {
+      color: $color;
+    }
+  }
+
+  .el-cascader .el-input.is-focus .el-input__inner {
+    border-color: $activeColor;
+  }
+
+  .el-cascader__dropdown {
+    background-color: $subCardColor;
+    color: $color;
+    border: $subCardColor;
+    .el-cascader-panel {
+      background-color: $subCardColor;
+      .el-cascader-node {
+        color: $color;
+        &.is-active {
+          color: $activeColor;
+        }
+        &.in-active-path {
+          color: $activeColor;
+        }
+        &:not(.is-disabled):focus,
+        &:not(.is-disabled):hover {
+          background-color: $bgColor;
+        }
+      }
+    }
+  }
+
+  // .el-cascader-menus {
+  //   border-color: $subCardColor;
+  //   .el-cascader-menu {
+  //     background-color: $subCardColor;
+  //     .el-cascader-menu__item {
+  //       color: $color;
+  //       &.is-active,
+  //       &:hover {
+  //         background-color: $bgColor;
+  //       }
+  //       &.is-disabled {
+  //         background-color: $subCardColor;
+  //       }
+  //     }
+  //   }
+  // }
+
+  .el-card {
+    color: inherit;
+    background-color: $cardColor;
+    border-color: $cardColor;
+  }
+
+  .el-form {
+    .el-form-item {
+      .el-form-item__label {
+        color: $color;
+      }
+    }
+  }
+
+  .el-popper {
+    $popoverColod: $subCardColor;
+    &[x-placement^='right'] {
+      .popper__arrow {
+        border-right-color: $popoverColod;
+        &::after {
+          border-right-color: $popoverColod;
+        }
+      }
+    }
+    &[x-placement^='left'] {
+      .popper__arrow {
+        border-left-color: $popoverColod;
+        &::after {
+          border-left-color: $popoverColod;
+        }
+      }
+    }
+    &[x-placement^='top'] {
+      .popper__arrow {
+        border-top-color: $popoverColod;
+        &::after {
+          border-top-color: $popoverColod;
+        }
+      }
+    }
+    &[x-placement^='bottom'] {
+      .popper__arrow {
+        border-bottom-color: $popoverColod;
+        &::after {
+          border-bottom-color: $popoverColod;
+        }
+      }
+    }
+  }
+
+  .el-popover {
+    // $popoverColod: $subCardColor;
+    border-color: $subCardColor;
+    background-color: $subCardColor;
+    color: $color;
+    // @include .el-popper
+  }
+
+  .el-dropdown {
+    color: $color;
+  }
+  .el-dropdown-menu {
+    background-color: $subCardColor;
+    color: $color;
+    border-color: $borderColor;
+    &.device-control-dropdown-menu {
+      background-color: $cardColor;
+      border-color: $borderColor;
+    }
+    .el-dropdown-menu__item {
+      color: $color;
+      &:hover {
+        color: $activeColorHasFont;
+        background: none;
+      }
+    }
+    .el-dropdown-menu__item.el-dropdown-menu__item--divided {
+      border-top-color: $borderColor;
+      &::before {
+        background-color: $subCardColor;
+      }
+    }
+  }
+
+  .el-tree {
+    background-color: $cardColor;
+    color: $color;
+    border-color: $borderColor;
+    .el-tree-node:focus > .el-tree-node__content {
+      background-color: $bgColor;
+    }
+    .el-tree-node__content:hover {
+      background-color: $bgColor;
+    }
+    &.el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+      background-color: $bgColor;
+    }
+  }
+
+  .el-upload.el-upload--picture-card {
+    border-color: $borderColor;
+    background-color: $cardColor;
+    &:hover {
+      border-color: $activeColor;
+      color: $activeColor;
+    }
+  }
+
+  .el-table {
+    background-color: $cardColor;
+    border-color: $borderColor;
+    border-top: 4px solid $activeColor;
+    &.el-table--border td,
+    &.el-table--border th {
+      border-color: $borderColor;
+    }
+    &::after,
+    &::before {
+      content: '';
+      background-color: $borderColor;
+    }
+    th {
+      background-color: $subCardColor;
+    }
+    .el-table__footer-wrapper thead div,
+    .el-table__header-wrapper thead div {
+      background-color: transparent;
+      color: $color;
+    }
+    tr {
+      background-color: transparent;
+      color: $color;
+      .el-icon-edit {
+        color: $activeColor;
+      }
+    }
+    td,
+    th.is-leaf {
+      border-color: $borderColor;
+    }
+    // .el-table__body-wrapper {
+    //   .el-table__empty-block {
+    //     .el-table__empty-text {
+    //       color: $color;
+    //     }
+    //   }
+    // }
+    .el-table__body tr.current-row > td {
+      background-color: $bgColor;
+    }
+    &.el-table--enable-row-hover {
+      .el-table__body {
+        tr:hover > td {
+          background-color: $bgColor;
+        }
+      }
+    }
+    .el-table__expanded-cell {
+      background-color: $cardColor;
+      box-shadow: inset 0 2px 0 $subCardColor;
+      &:hover {
+        background-color: $bgColor !important;
+        // background-color: #fbfdff !important;
+      }
+    }
+  }
+
+  .el-loading-mask {
+    background-color: rgba($cardColor, 0.9);
+    .el-loading-text {
+      color: $activeColor;
+    }
+    .el-loading-spinner {
+      .path {
+        stroke: $activeColor;
+      }
+    }
+  }
+
+  .el-message-box {
+    background: $subCardColor;
+    border-color: $borderColor;
+    .el-message-box__header {
+      .el-message-box__title {
+        color: $color;
+      }
+      .el-message-box__headerbtn:hover .el-message-box__close {
+        color: $activeColor;
+      }
+    }
+    .el-message-box__content {
+      color: $color;
+    }
+  }
+  // .el-carousel {
+  //   .el-carousel__item {
+  //     // background-color: $cardColor;
+  //   }
+  // }
+  .el-color-dropdown {
+    border-color: $subCardColor;
+    background-color: $subCardColor;
+  }
+}

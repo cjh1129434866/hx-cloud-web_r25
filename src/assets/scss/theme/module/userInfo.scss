@@ -1,0 +1,28 @@
+@mixin user-info-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  .user-info {
+    .el-form {
+      .el-form-item {
+        .el-form-item__label {
+          color: $text-grey;
+        }
+      }
+    }
+    .user_info_title {
+      border-bottom-color: $activeColor;
+    }
+    .avatar,
+    .avatar-uploader-icon {
+      color: $activeColor;
+      &:hover {
+        border-color: $activeColor;
+      }
+    }
+    .avatar-uploader .el-upload:hover {
+      border-color: $activeColor;
+    }
+    .el-icon-edit {
+      cursor: pointer;
+      color: $activeColor;
+    }
+  }
+}

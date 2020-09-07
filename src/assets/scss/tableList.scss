@@ -1,0 +1,25 @@
+.table-expand {
+  font-size: 0;
+  label {
+    width: 90px;
+  }
+  .el-form-item {
+    margin-right: 0;
+    margin-bottom: 0;
+    width: 50%;
+  }
+}
+.item-hover {
+  &:hover {
+    cursor: pointer;
+    .item-hover-btn {
+      visibility: visible;
+    }
+  }
+  .item-hover-btn {
+    visibility: hidden;
+  }
+  .el-icon-delete {
+    color: $element-danger-color;
+  }
+}

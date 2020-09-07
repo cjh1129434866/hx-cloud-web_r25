@@ -1,0 +1,173 @@
+/* Clearfix
+ For modern browsers
+ 1. The space content is one way to avoid an Opera bug when the
+    contenteditable attribute is included anywhere else in the document.
+    Otherwise it causes space to appear at the top and bottom of elements
+    that are clearfixed.
+ 2. The use of `table` rather than `block` is only necessary if using
+    `:before` to contain the top-margins of child elements.
+ Source: http://nicolasgallagher.com/micro-clearfix-hack */
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// （Responsive image）Keep images from scaling beyond the width of their parents.
+@mixin img-responsive($display: block) {
+  display: $display;
+  max-width: 100%; // Part 1: Set a maximum relative to the parent
+  height: auto; // Part 2: Scale the height according to the width, otherwise you get stretching
+}
+
+// Resize anything
+@mixin resizable($direction) {
+  resize: $direction; // Options: horizontal, vertical, both
+  overflow: auto; // Per CSS3 UI, `resize` only applies when `overflow` isn't `visible`
+}
+
+// Text overflow
+// Requires inline-block or block for proper styling
+@mixin text-overflow() {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Center-align a block level element
+@mixin center-block() {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@mixin absolute-center() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin fixed-center() {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin flex-box-center() {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+@mixin flex-title-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+@mixin flex-item($height) {
+  height: $height;
+  line-height: $height;
+  margin-bottom: $spacing-small-size;
+  padding: 0 $spacing-size;
+}
+/**
+ * 根据 el-col 数量和屏幕的宽度的不同，动态计算统计图 el-col 的高度和宽度
+ * 1、el-col 数量大于8时，高度为$minHeight，宽度根据以下情况计算:
+ *    1-1、当屏幕 < 768px  时，单列显示(width:100%)，因为此时首页会分为1列（详情看 src\assets\scss\response.scss）;
+ *    1-2、当屏幕 >= 768px && <1200 px 时，两列显示(width:50%)，因为此时首页会分为2列（详情看 src\assets\scss\response.scss）;
+ *    1-3、当屏幕 >= 1200px && < 1360px 时，单列显示(width:100%)，因为此时首页会分为3列（详情看 src\assets\scss\response.scss）;
+ *    1-4、当屏幕 >= 1360px 时，两列显示(width:50%)，因为此时首页会分为3列（详情看 src\assets\scss\response.scss）;
+ * 2、el-col 数量小于8时,宽度根据以下情况计算：
+ *    2-1、 数量小于8大于4时，宽度的计算情况与1相同；
+ *    2-2、el-col 数量小于4时，宽度根据以下情况计算:
+ *        2-2-1、当屏幕 < 768px 时，单列显示(width:100%);
+ *        2-2-2、当屏幕 >= 768px && <1200 px 时，两列显示(width:50%);
+ *        2-2-3、当屏幕 >= 1200px 时，单列显示(width:100%);
+ * 3、el-col 数量小于8时且宽度小于1200px时,高度默认为$minHeight：
+ * 4、当el-col的数量为奇数时，最后一个el-col宽度设置为100%，防止出现空白；
+ * Fix：从2019-09-05起，所有统计图的高度都默认为 $minHeight，高度不够就让外部的模块（通知模块等）自适应
+ */
+@mixin count_panel-statistics-view_height($minMediaWidth: 1920px, $colClass: '.el-col') {
+  $minHeight: 233px;
+  height: $minHeight; // 高度为$minHeight
+  // ------------------- 1、当col的数量超过8 -----------------------
+  // 宽度计算规则
+  @if $minMediaWidth < 768px {
+    // 1-1：单列显示
+    width: 100%;
+  } @else if $minMediaWidth >= 768px and $minMediaWidth < 1200px {
+    // 1-2：两列显示
+    width: 50%;
+  } @else if $minMediaWidth >= 1200px and $minMediaWidth < 1360px {
+    // 1-3：单列显示
+    width: 100%;
+    // 取消最后一个的 padding-bottom
+    &:last-child {
+      padding-bottom: 0;
+    }
+  } @else {
+    // 1-4：两列显示
+    width: 50%;
+    // 取消最后两个的 padding-bottom
+    &:last-child, // 最后一个
+    &:nth-last-child(2):nth-of-type(odd) { // 倒数第二个且为奇数
+      padding-bottom: 0;
+    }
+  }
+  // ------------------- 2、当col的数量在8以内 -----------------------
+  @for $i from 1 through 8 {
+    &:first-child:nth-last-child(#{$i}),
+    &:first-child:nth-last-child(#{$i}) ~ #{$colClass} {
+      @if $i > 4 {
+        // // 2-1、数量小于8大于4时,平分父级容器的高度，宽度的计算情况与1相同；
+        // height: $minHeight; // update at 2019/09/05 // percentage(1 / ceil($i / 2));
+        // // &:last-child,
+        // // &:nth-last-child(2) {
+        // //   padding-bottom: 0;
+        // // }
+      } @else {
+        // // // 2-2、数量小于4时,平分父级容器的高度，宽度如下：
+        // // height: percentage(1 / $i);
+        // height: $minHeight; // update at 2019/09/05 // percentage(1 / $i);
+        @if $minMediaWidth < 768px {
+          // 2-2-1：单列显示
+          width: 100%;
+        } @else if $minMediaWidth >= 768px and $minMediaWidth < 1200px {
+          // 2-2-2：两列列显示
+          width: 50%;
+        } @else if $minMediaWidth >= 1200px {
+          // 2-2-3：单列显示
+          width: 100%;
+        }
+      }
+      // // ------------------- 3、el-col 数量小于8时且宽度小于1200px时,高度默认为$minHeight -------------------
+      // @if $minMediaWidth < 1200px {
+      //   height: $minHeight;
+      // }
+      // 4.b、最后一个是奇数(由于4.a的样式选择器优先级较低,不够覆盖当前的样式，故重新声明)
+      &:nth-of-type(odd):last-child {
+        width: 100%;
+      }
+    }
+  }
+  // ------------------- 4.a、最后一个是奇数 -------------------
+  &:nth-of-type(odd):last-child {
+    width: 100%;
+  }
+}

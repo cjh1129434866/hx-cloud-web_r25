@@ -1,0 +1,174 @@
+/*
+=========================== color ===========================
+== 注: 1、elementUI color 和 base color 的颜色值尽量不要更改 ==
+==     2、elementUI color 和 base color 的颜色值尽量不要更改 ==
+=============================================================
+*/
+
+/* -------------- elementUI color --------- */
+$element-lightBlue-color: #58b7ff;
+$element-blue-color: #20a0ff;
+$element-darkBlue-color: #1d8ce0;
+$element-success-color: #13ce66;
+$element-warning-color: #f7ba2a;
+$element-danger-color: #ff4949;
+/* ------------ elementUI color END ------- */
+
+// ------------------------------ base color（待整理）
+$white: #fff;
+$text-grey: #999999;
+$border-grey: #ebeaeb; // #e1e6eb;
+/*---------------------------- box shadow（待整理）----------------------------------*/
+$box-shadow-header: 0px 0px 12px 0px rgba(0, 0, 0, 0.5);
+$box-shadow-sidenav: 0px 12px 12px 0px rgba(0, 0, 0, 0.5);
+
+$box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+$box-shadow-wrap: 0 2px 4px 2px rgba(#000000, 0.2);
+
+/* ---------- font color END ------- */
+
+/* ----------- head color ----------- */
+$head-bgcolor: black;
+$head-hover-bgcolor: #48576a;
+$head-color: $white;
+/* --------- head color END --------- */
+
+/* ------------ theme color ------- */
+// 默认皮肤的颜色值
+$theme-base-bgColor: #f5f5f5; // 背景
+$theme-base-cardColor: #ffffff; // 卡片
+$theme-base-subCardColor: #ffffff; // 二级卡片（卡片上的卡片）
+$theme-base-fontColor: #333333; // 字体
+$theme-base-activeFontColor: #009688; // 激活时的字体
+$theme-base-activeBgHasFont: #009688; // 激活时的背景（带文字时的背景）
+$theme-base-activeBtn: #009688; // 激活时的按钮
+$theme-base-border: $border-grey; // border
+$theme-base-modules: (
+  home-list: (
+    search-icon: #999999,
+    type-icon: #cccccc,
+    item-icon: #cccccc,
+    item-font: #1c1a1b,
+    border: #f4f4f4
+  ),
+  home-content: (
+    btn-font: #ffffff,
+    ctrl-btn-font-unactive: #999999,
+    ctrl-btn-unactive: #eae9e9,
+    tab-item: #eae9e9,
+    border: $theme-base-border
+  ),
+  dive-list: (
+    type-wrap: #e5e5e5
+  ),
+  element: (
+    inputPlaceholder: #aaaaaa,
+    inputBorder: #bfcbd9,
+    inputGroupBg: #fbfdff,
+    tableTh: #eef1f6,
+    checkboxUnActived: $theme-base-fontColor
+  ),
+  icon: (
+    disabled: #999999
+  )
+);
+// 黑暗风格皮肤的颜色值
+$theme-dark-bgColor: #000000;
+$theme-dark-cardColor: #1a1a1c;
+$theme-dark-subCardColor: #272729;
+$theme-dark-fontColor: #ffffff;
+$theme-dark-activeFontColor: #04ffe4; // 激活时的文字;
+$theme-dark-activeBgHasFont: #01cfba; // 激活时的背景（带文字时的背景）
+$theme-dark-activeBtn: linear-gradient(to bottom, #048ad3, #04ffe4); // 激活时的按钮
+$theme-dark-border: #29292b;
+$theme-dark-modules: (
+  home-list: (
+    search-icon: $theme-dark-activeFontColor,
+    type-icon: #3d3d40,
+    item-icon: #272729,
+    item-font: #999999,
+    border: #3a3a3c
+  ),
+  home-content: (
+    btn-font: $theme-dark-fontColor,
+    ctrl-btn-font-unactive: $theme-dark-fontColor,
+    ctrl-btn-unactive: linear-gradient(to bottom, #4e4e4e, #727272),
+    tab-item: $theme-dark-cardColor,
+    border: #3a3a3c
+  ),
+  dive-list: (
+    type-wrap: $theme-dark-subCardColor
+  ),
+  element: (
+    inputPlaceholder: #999999,
+    inputBorder: #3a3a3c,
+    inputGroupBg: $theme-dark-subCardColor,
+    tableTh: $theme-dark-subCardColor,
+    checkboxUnActived: #666666
+  ),
+  icon: (
+    disabled: #666666
+  )
+);
+/* ------------ theme color END ------- */
+
+/* ============================================================
+ * =========================== size ===========================
+ * ============================================================
+ */
+
+/*----------------------- spacing size ----------------------*/
+$spacing-size: 10px; // 默认的间距: 10
+$spacing-small-size: $spacing-size/2; // 小间距:5px
+$spacing-medium-size: $spacing-size/2 * 3; // 中等尺寸的间距:15px
+$spacing-large-size: $spacing-size * 2; // 大型尺寸的间距:20px;
+/*---------------------- spacing size END ---------------------*/
+
+/*---------------------- radius size ---------------------------*/
+$radius-size: 8px;
+/*-------------------- radius size END -------------------------*/
+
+/*------------------------ font size ----------------------------*/
+$font-large: 18px; // 最大字体的 size
+$font-medium: 16px; // 中等字体的 size
+$font-default: 14px; // 默认字体的 size
+$font-small: 12px; // 最小字体的 size
+$icon-large-size: 24px;
+/*----------------------- font size END ---------------------------*/
+
+/*---------------------- padding size ----------------------------*/
+$module-content-padding: $spacing-size * 3; // 30px;
+/*--------------------- padding size END---------------------------*/
+
+/*---------------------------- height size ----------------------------------*/
+$header-height: 60px; // 头部高度
+$header-logo-height: 32px; // 头部 logo 高度
+$pagination-height: 35px; //table分页栏高度，目前只读
+$devic-card-minHeight: 370px; // 卡片最小高度
+$devic-card-height: 580px; // 卡片默认高度
+$devic-card-title-height: 51.09px; // 卡片title的高度
+$devic-card-body-height: $devic-card-height - $module-content-padding * 2 - $pagination-height - $devic-card-title-height - $spacing-size; // 卡片 body 的高度
+/*------------------------- height size END -------------------------------*/
+
+/*---------------------------- width size ----------------------------------*/
+$sidenav-width: 120px; // 左侧导航菜单宽度
+$logo-width: $header-logo-height; // logo 宽度
+$margin-width: 15px; // 外边距宽度
+$scrollbar-width: 17px; // easyscrollbar （自定义滚动条）宽度
+$label-Width: 6em; // label 的宽度
+/*--------------------------- width size END---------------------------------*/
+
+/* ==============================================================
+ * ========================== z-index ===========================
+ * ==============================================================
+ */
+// 注：$amap-logo-index < $map-wrap-index < $card-loading-index  < $sidenav-index
+$max-index: 10000; // 最顶层的层级，也即loading的mark的层级
+$full-screen-index: 1000; // 全屏卡片的层级，必须小于下拉的层级
+$amap-overlays-index: 110; // 高德地图信息窗体层级，只读
+$amap-logo-index: 160; // 高德地图logo层级，只读
+$amap-copyright-index: 160; // 高德地图copyright层级，只读
+$amap-sug-result-index: $max-index - 1; // 高德地图输入提示层级(暂时独立，与其他模块不挂钩)
+$map-wrap-index: $amap-logo-index + 5; // 自定义地图模块层级
+$card-loading-index: $amap-logo-index + 7; // 右侧卡片lodaing层级
+$sidenav-index: $amap-logo-index + 20; // 左侧菜单层级

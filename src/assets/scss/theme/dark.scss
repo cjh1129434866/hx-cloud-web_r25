@@ -1,0 +1,23 @@
+/*
+ * @Author: jiapeng.Zheng
+ * @Date: 2019-07-11 09:40:33
+ * @LastEditors: jiapeng.Zheng
+ * @LastEditTime: 2019-08-08 17:09:45
+ * @Description: 暗黑风格的主题（与主题相关的文件禁止包含会影响页面布局的属性，只允许更改颜色）
+ */
+@import '../variables';
+@import './module/index';
+.themem.dark {
+  // 引用暗黑风格的主题，
+  @include theme-style(
+    $theme-dark-activeFontColor,
+    $theme-dark-activeBgHasFont,
+    $theme-dark-activeBtn,
+    $theme-dark-fontColor,
+    $theme-dark-bgColor,
+    $theme-dark-cardColor,
+    $theme-dark-subCardColor,
+    $theme-dark-border,
+    $theme-dark-modules
+  );
+}

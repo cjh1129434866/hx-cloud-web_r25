@@ -1,0 +1,211 @@
+// 地图icon
+@mixin map($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  // 地图上的定位icon
+
+  .map-mark-icon {
+    &::before {
+      background: $activeColorHasFont;
+      color: $white;
+    }
+    span {
+      color: $white;
+    }
+    &::after {
+      border-top-color: $activeColorHasFont;
+    }
+    &[data-hover='true'],
+    &[data-active='true'],
+    &:hover {
+      &::before {
+        background: $activeColor;
+      }
+      &::after {
+        border-top-color: $activeColor;
+      }
+    }
+    &[data-isOnline='false'] {
+      &::before {
+        background: $text-grey;
+      }
+      &::after {
+        border-top-color: $text-grey;
+      }
+    }
+    &[data-isOnline='true'][data-isWarn='true'] {
+      &::before {
+        background: $element-warning-color;
+      }
+      &::after {
+        border-top-color: $element-warning-color;
+      }
+    }
+  }
+  .amap-info-content {
+    color: black;
+    // background-color: $cardColor;
+    // border-color: $borderColor;
+  }
+  .amap-sug-result {
+    background-color: $subCardColor;
+    .auto-item:hover {
+      background-color: $bgColor;
+    }
+  }
+}
+// 统计图表单
+@mixin statistics-table($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  .statistics-table {
+    color: $color;
+    .chart-view-table-wrap {
+      background-color: $cardColor;
+      //   &.fixed-col-head-cross {
+      //     background-color: #f1f1f1;
+      //   }
+    }
+  }
+}
+// 鼠标右键菜单
+@mixin context-menu($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  .context-menu-wrap {
+    .context-menu {
+      background-color: $bgColor;
+      border-color: $bgColor;
+      .menu-item {
+        &:hover {
+          background-color: $cardColor;
+        }
+      }
+    }
+  }
+}
+// 链接
+@mixin text-link($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  .text-link {
+    color: $activeColor;
+  }
+}
+
+// icon 列表
+@mixin icon-list($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  .icon-list {
+    li {
+      color: $color;
+      &:hover {
+        background-color: $activeColor;
+      }
+    }
+  }
+}
+
+// 自定义按钮
+@mixin btn($activeColor) {
+  .click-btn {
+    &.active,
+    &:hover {
+      color: $activeColor;
+    }
+  }
+}
+
+@mixin no-img($subCardColor, $modules) {
+  $icon-module: map-get($modules, 'icon');
+  $disabledIconColor: map-get($icon-module, 'disabled');
+  .no-img {
+    background-color: $subCardColor;
+    .no-img-icon {
+      color: $disabledIconColor;
+    }
+  }
+}
+
+@mixin video-player($activeColor, $color, $cardColor, $subCardColor, $borderColor) {
+  // 设备详情-摄像头
+  .video-wrap {
+    background-color: $cardColor;
+    color: $color;
+    .video-list {
+      background-color: $subCardColor;
+      box-shadow: 3px 0px 2px 0px rgba(0, 0, 0, 0.2);
+      .scroll-item:hover {
+        .edit-btns {
+          color: $color;
+          .edit-btn:hover {
+            color: $activeColor;
+          }
+          .del-btn:hover {
+            color: $element-danger-color;
+          }
+          color: $color;
+        }
+      }
+      .list-footer {
+        border-top: 1px solid $borderColor;
+      }
+    }
+    .list-show-btn {
+      background-color: $subCardColor;
+      border: 1px solid $borderColor;
+    }
+  }
+}
+
+// 设备控制的输入框
+@mixin controller-input($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  $home-content-module: map-get($modules, 'home-content');
+  @if $home-content-module == null {
+    @warn "miss '$home-content-module' arg";
+  }
+  $moduleBorderColor: map-get($home-content-module, 'border');
+  @if $moduleBorderColor == null {
+    @warn "'controller-input' mixin miss '$moduleBorderColor' arg";
+  }
+  // 配置页面的设备控制的输入框
+  .set-and-now-input {
+    .set-input {
+      border-bottom-color: $moduleBorderColor;
+      input {
+        border-color: $activeColor;
+        background-color: $subCardColor;
+      }
+    }
+  }
+  // 重新定义控制面板下拉的样式
+  .set-select-option.el-popper {
+    background-color: $cardColor;
+    border-color: $cardColor;
+    .popper__arrow::after {
+      border-bottom-color: $cardColor;
+    }
+  }
+  // 首页内容模块的的设备控制的输入框
+  .ctrlInput {
+    .el-input-group__append {
+      &:hover {
+        background-color: $activeColor;
+        .ctrlInputBtn {
+          color: $white;
+        }
+      }
+    }
+  }
+}
+// 404 页面
+@mixin not-found-page($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  .page-error {
+    background-color: $bgColor;
+    color: $color;
+  }
+}
+
+@mixin components-theme($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules) {
+  @include map($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  @include statistics-table($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  @include context-menu($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  @include text-link($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  @include icon-list($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  @include btn($activeColor);
+  @include no-img($subCardColor, $modules);
+  @include video-player($activeColor, $color, $cardColor, $subCardColor, $borderColor);
+  @include controller-input($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+  @include not-found-page($activeColor, $activeColorHasFont, $activeBtn, $color, $bgColor, $cardColor, $subCardColor, $borderColor, $modules);
+}
