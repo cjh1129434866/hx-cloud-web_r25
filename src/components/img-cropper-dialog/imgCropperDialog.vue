@@ -260,7 +260,7 @@ export default {
             .uploadImage(this.imgFilePostUrl, param)
             .then(result => {
               this.$emit('upload-success', img)
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.onClose()
             })
             .catch(errMsg => {

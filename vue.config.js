@@ -11,6 +11,7 @@ const { IsReport, IsPro, Title } = require('./config/index.js')
 const { genHtmlWebpackTagsPluginOptions } = require('./config/lib.config.js')
 
 module.exports = {
+  lintOnSave: false,
   productionSourceMap: !IsPro,
   // https://cli.vuejs.org/zh/guide/css.html#css-modules
   css: {
@@ -124,11 +125,41 @@ module.exports = {
   },
 
   devServer: {
-    proxy: {
+    /* proxy: {
       '/test': { target: 'http://192.168.100.3:8082' },
       '/Images': { target: 'http://www.hexucloud.com:18003' }, // 'http://192.168.40.206:8003',
       '/Files': { target: 'http://www.hexucloud.com:18003' }, // 'http://192.168.40.206:8003',
       '/api': { target: 'http://www.hexucloud.com:18003' }, // 'http://192.168.40.206:8003',
+      '/videoapi': {
+        target: 'https://open.ys7.com', // target host
+        pathRewrite: {
+          '^/videoapi': '/api' // rewrite path
+        },
+        headers: {
+          host: 'open.ys7.com'
+        }
+      }
+    } */
+    /* proxy: {
+      '/test': { target: 'http://192.168.100.7' },
+      '/Images': { target: 'http://192.168.100.7' }, // 'http://192.168.40.206:8003',
+      '/Files': { target: 'http://192.168.100.7' }, // 'http://192.168.40.206:8003',
+      '/api': { target: 'http://192.168.100.7' }, // 'http://192.168.40.206:8003',
+      '/videoapi': {
+        target: 'https://open.ys7.com', // target host
+        pathRewrite: {
+          '^/videoapi': '/api' // rewrite path
+        },
+        headers: {
+          host: 'open.ys7.com'
+        }
+      }
+    } */
+    proxy: {
+      '/test': { target: 'http://183.62.237.211:1080' },
+      '/Images': { target: 'http://183.62.237.211:1080' }, // 'http://192.168.40.206:8003',
+      '/Files': { target: 'http://183.62.237.211:1080' }, // 'http://192.168.40.206:8003',
+      '/api': { target: 'http://183.62.237.211:1080' }, // 'http://192.168.40.206:8003',
       '/videoapi': {
         target: 'https://open.ys7.com', // target host
         pathRewrite: {

@@ -130,7 +130,7 @@ export const UPLOAD_CONFIG = {
   },
   // 用户头像
   avatarImageCof: {
-    url: IMAGE_URL + '/api/User/ChangeUserPic/',
+    url: IMAGE_URL + '/api/user/Picture/',
     size: 2, // 头像图片大小,单位MB
     unit: 'M',
     fixedNumber: [1, 1], // vue-cropper 的 fixedNumber
@@ -138,11 +138,12 @@ export const UPLOAD_CONFIG = {
   },
   // 组织logo
   logoImageCof: {
-    url: IMAGE_URL + '/api/Group/GroupImageUpload/',
+    url: IMAGE_URL + '/api/group/logo/',
     size: (2 / 1024) * 100, // 组织logo图片大小(200K),单位MB
     unit: 'K',
     fixedNumber: [1, 1], // vue-cropper 的 fixedNumber
-    type: 'image/png' // 图片类型
+    type: 'image/png', // 图片类型
+    method: 'put'
   },
   // 移动端apk
   appFileCof: {

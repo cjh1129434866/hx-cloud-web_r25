@@ -14,9 +14,9 @@ import { IMAGE_URL, SESSIONSTORAGE_USERMENU_KEY, SESSIONSTORAGE_ISFIRST_KEY, SES
 export default {
   async getUserInfo({ commit /** state */ }) {
     const res = await $apis.user.getUser()
-    res.Picture = res.Picture ? IMAGE_URL + res.Picture + `?_=${_.random(0, 99999)}` : null
-    commit('$vuexSetUserInfo', res)
-    return res
+    res.data.picture = res.data.picture ? IMAGE_URL + '/' + res.data.picture + `?_=${_.random(0, 99999)}` : null
+    commit('$vuexSetUserInfo', res.data)
+    return res.data
   },
   async getUserMenu({ commit /** state, getters  */ }) {
     // ！！！不延时的话，beforeEachHooks.js中的checkLoginAuth会无限次执行???
@@ -25,20 +25,20 @@ export default {
     // 从getSessionStorage获取用户菜单，防止多次请求,也是为了确保能够获取已经动态添加了的子菜单
     let $userMenu = $utils.getSessionStorage(SESSIONSTORAGE_USERMENU_KEY)
     $utils.setSessionStorage(SESSIONSTORAGE_ISFIRST_KEY, false)
-    if (!$userMenu || $userMenu.length <= 0) {
+    if (!$userMenu) {
       $utils.setSessionStorage(SESSIONSTORAGE_ISFIRST_KEY, true) // 第一次加载
-      const res = await $apis.sysMenu.getTopLevelMenu()
-      $userMenu = res.list
+      // const res = await $apis.sysMenu.getTopLevelMenu()
+      $userMenu = []
     }
     commit('$vueSetUserMenu', $userMenu)
     return $userMenu
   },
 
-  async getUserGroup({ commit /** state, getters */ }) {
-    const res = await $apis.group.findByToken()
-    res.Logo = res.Logo ? IMAGE_URL + res.Logo + `?_=${_.random(0, 99999)}` : null
-    commit('$vuexSetUserGroup', res)
-    return res
+  async getUserGroup({ commit, state /** state, getters */ }) {
+    const res = await $apis.group.findByToken(state.userInfo.groupId)
+    res.data.logo = res.data.logo ? IMAGE_URL + res.data.logo + `?_=${_.random(0, 99999)}` : null
+    commit('$vuexSetUserGroup', res.data)
+    return res.data
   },
 
   getHistoryPath({ /** dispatch */ commit /** state */ }) {

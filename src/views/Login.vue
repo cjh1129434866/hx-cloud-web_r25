@@ -2,7 +2,7 @@
  * @Author: jiapeng.Zheng
  * @Date: 2019-06-26 14:29:25
  * @LastEditors  : jiapeng.Zheng
- * @LastEditTime : 2020-04-01 11:26:42
+ * @LastEditTime : 2020-08-11 14:15:45
  * @Description: 登录页
  -->
 <template>
@@ -48,7 +48,6 @@
 
 <script>
 // import { $vueRouterGenerator } from '@helper'
-
 import { locales } from '@/locales'
 export default {
   data() {
@@ -58,8 +57,9 @@ export default {
       messageTime: 3, // 消息显示的时间 3s
       isLoading: false,
       account: {
-        Account: '', // '15817468540',
-        Password: '' // 'abc'
+        Account: '', // 'hx0001',
+        Password: '', // '123456'
+        Mark:0
       },
       rules: {
         Account: [
@@ -125,15 +125,16 @@ export default {
           try {
             this.isLoading = true
             // 清除登录标识,主要是清除sessionStorage,防止用户在主页点击退回后重新登录时sessionStorage没有清除
+            
             this.$auth.clearSession()
             const result = await this.$apis.user.login(postData)
             if (result.Token !== null) {
               // 保存用户的token和account到cookie
-              this.$auth.setSession({ Account: postData.Account, Token: result.Token })
+              this.$auth.setSession({ Account: postData.Account, Token: result.token })
               // 获取用户的数据
               // let user = await this.$store.dispatch('getUser')
               // let { userInfo, $userMenu } = user
-              // // 动态生成菜单
+              // // 动态生成菜单s
               // $vueRouterGenerator.generator($userMenu, userInfo.IsAdmin)
               // this.$router.push('/common/home')
               // document.documentElement.requestFullscreen() // 全屏

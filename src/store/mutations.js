@@ -15,17 +15,16 @@ export default {
 
   // 保存用户信息
   $vuexSetUserInfo(state, info) {
-    state.userId = info.UserId
-    state.isLogin = !!info.Account
+    // state.userId = info.UserId
+    state.isLogin = !!info.account
     state.userInfo = {
-      account: info.Account,
-      token: info.Token,
+      account: info.account,
       ...info
     }
   },
   // 实时更改用户头像
   $vuexSetUserPicture(state, picture) {
-    state.userInfo.Picture = picture
+    state.userInfo.picture = picture
   },
   // 设置mqtt连接状态
   $vuexSetMqttIsConnect(state, isConnect) {

@@ -17,7 +17,7 @@ export default {
    * @param { Account: '', Password: ''} data
    */
   login(data) {
-    return $ajax.post(serverUrl('user/login'), data)
+    return $ajax.post(serverUrl('User'), data)
   },
 
   /**
@@ -54,10 +54,10 @@ export default {
    * 获取用户信息
    */
   getUser() {
-    const account = $utils.getCookie('account')
+   /*  const account = $utils.getCookie('account')
     const token = $utils.getCookie('token')
-    const data = { account, token }
-    return $ajax.get(serverUrl('user/GetUser'), data)
+    const data = { account, token } */
+    return $ajax.get(serverUrl('user/myinfo'))
   },
   /**
    * 直接根据account和token获取用户信息（不通过cookie，登录时用）
@@ -95,22 +95,21 @@ export default {
    * @param {string} bSex       性别
    * @param {string} remark     备注
    */
-  updateUser({ Id, UserName, bSex, remark }) {
-    const account = $utils.getCookie('account')
+  updateUser({ userName, email, phone }) {
+    /* const account = $utils.getCookie('account')
     const token = $utils.getCookie('token')
-    const data = { account, token, Id, UserName, bSex, remark }
-    return $ajax.post(serverUrl('user/UpdateUser'), data)
+    const data = { account, token, Id, UserName, bSex, remark } */
+    const data = { Phone: phone, Email: email, UserName: userName }
+    return $ajax.put(serverUrl('user'), data)
   },
   /**
    * 修改用户密码
    * @param {string} Password       密码
    * @param {string} PasswordAgain  确认密码
    */
-  changePwd({ Password, PasswordAgain }) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, Password, PasswordAgain }
-    return $ajax.post(serverUrl('user/ChangePassword'), data)
+  changePwd({ Password, PasswordAgain, oldPassword }) {
+    const data = { Password, PasswordAgain, oldPassword}
+    return $ajax.post(serverUrl('user/password'), data)
   },
   /**
    * 获取组织内的用户列表(管理员操作)

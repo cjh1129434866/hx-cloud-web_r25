@@ -24,7 +24,7 @@ const state = {
   $mqtt_error_data: {}, // 设备通过mqtt发送的报警数据
   $isMobile: /Mobile/i.test(navigator.userAgent),
   isLogin: true, // 用户是否已经登录
-  userId: '', // 用户Id
+  // userId: '', // 用户Id
   userInfo: {}, // 用户信息
   $userGroup: {}, // 用户组织信息
   $userMenu: [], // 用户菜单信息

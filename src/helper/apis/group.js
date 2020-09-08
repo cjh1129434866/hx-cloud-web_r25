@@ -26,10 +26,10 @@ export default {
    * 根据组织标示查找组织
    * @param { token:'组织标识' } token
    */
-  findByToken() {
-    const token = $utils.getCookie('token')
-    const data = { token }
-    return $ajax.get(serverUrl('Group/FindByToken'), data)
+  findByToken(id) {
+  /*   const token = $utils.getCookie('token')
+    const data = { token } */
+    return $ajax.get(serverUrl(`group/${id}`))
   },
   /**
    * 添加组织

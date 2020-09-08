@@ -18,11 +18,11 @@
               <!-- 账号 -->
               <el-col :xs="24" :sm="24" :md="24" :lg="24">
                 <el-form-item :label="$t('account')" prop="date1">
-                  <span>{{ fillForm.Account }}</span>
+                  <span>{{ fillForm.account }}</span>
                 </el-form-item>
               </el-col>
               <!-- 性别 -->
-              <el-col :xs="24" :sm="24" :md="24" :lg="24">
+              <!-- <el-col :xs="24" :sm="24" :md="24" :lg="24">
                 <el-form-item :label="$t('sex')" prop="bSex">
                   <span v-if="!fillForm.bSexIsEdit">{{ sexTypeDic[fillForm.bSex] }}</span>
                   <i class="el-icon-edit" v-if="!fillForm.bSexIsEdit" @click="fillForm.bSexIsEdit = true"></i>
@@ -32,26 +32,46 @@
                   <el-button type="cancel" v-if="fillForm.bSexIsEdit" @click="cancelEdit('bSex')">{{ $t('cancel') }}</el-button>
                   <el-button type="primary" v-if="fillForm.bSexIsEdit" @click="changeInfo('bSexIsEdit')">{{ $t('confirm') }}</el-button>
                 </el-form-item>
-              </el-col>
-              <!-- 头像 -->
-              <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                <el-form-item :label="$t('avatar')" prop="Picture" class="img-item">
-                  <img @click="changeAvatarImg" v-if="userInfo.Picture" :src="userInfo.Picture" class="avatar" />
-                  <i @click="changeAvatarImg" v-else class="el-icon-plus avatar-uploader-icon"></i>
-                </el-form-item>
-              </el-col>
+              </el-col> -->
               <!-- 名称 -->
               <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                <el-form-item :label="$t('name')" prop="UserName" :show-message="fillForm.UserNameIsEdit">
-                  <span v-if="!fillForm.UserNameIsEdit">{{ fillForm.UserName }}</span>
+                <el-form-item :label="$t('name')" prop="userName" :show-message="fillForm.UserNameIsEdit">
+                  <span v-if="!fillForm.UserNameIsEdit">{{ fillForm.userName }}</span>
                   <i class="el-icon-edit" v-if="!fillForm.UserNameIsEdit" @click="fillForm.UserNameIsEdit = true"></i>
-                  <el-input :placeholder="$t('name')" v-model="fillForm.UserName" v-if="fillForm.UserNameIsEdit"></el-input>
-                  <el-button type="cancel" v-if="fillForm.UserNameIsEdit" @click="cancelEdit('UserName')">{{ $t('cancel') }}</el-button>
+                  <el-input :placeholder="$t('name')" v-model="fillForm.userName" v-if="fillForm.UserNameIsEdit"></el-input>
+                  <el-button type="cancel" v-if="fillForm.UserNameIsEdit" @click="cancelEdit('UserNameIsEdit')">{{ $t('cancel') }}</el-button>
                   <el-button type="primary" v-if="fillForm.UserNameIsEdit" @click="changeInfo('UserNameIsEdit')">{{ $t('confirm') }}</el-button>
                 </el-form-item>
               </el-col>
-              <!-- 备注 -->
+              <!-- 手机号 -->
               <el-col :xs="24" :sm="24" :md="24" :lg="24">
+                <el-form-item :label="$t('phone')" prop="phone" :show-message="fillForm.phoneIsEdit">
+                  <span v-if="fillForm.phone && !fillForm.phoneIsEdit">{{ fillForm.phone }}</span>
+                  <i class="el-icon-edit" v-if="!fillForm.phoneIsEdit" @click="fillForm.phoneIsEdit = true"></i>
+                  <el-input :placeholder="$t('phone')" v-model="fillForm.phone" v-if="fillForm.phoneIsEdit"></el-input>
+                  <el-button type="cancel" v-if="fillForm.phoneIsEdit" @click="cancelEdit('phoneIsEdit')">{{ $t('cancel') }}</el-button>
+                  <el-button type="primary" v-if="fillForm.phoneIsEdit" @click="changeInfo('phoneIsEdit')">{{ $t('confirm') }}</el-button>
+                </el-form-item>
+              </el-col>
+              <!-- 邮箱 -->
+               <el-col :xs="24" :sm="24" :md="24" :lg="24">
+                <el-form-item :label="$t('email')" prop="email" :show-message="fillForm.emailIsEdit">
+                  <span v-if="fillForm.email && !fillForm.emailIsEdit">{{ fillForm.email }}</span>
+                  <i class="el-icon-edit" v-if="!fillForm.emailIsEdit" @click="fillForm.emailIsEdit = true"></i>
+                  <el-input :placeholder="$t('email')" v-model="fillForm.email" v-if="fillForm.emailIsEdit"></el-input>
+                  <el-button type="cancel" v-if="fillForm.emailIsEdit" @click="cancelEdit('emailIsEdit')">{{ $t('cancel') }}</el-button>
+                  <el-button type="primary" v-if="fillForm.emailIsEdit" @click="changeInfo('emailIsEdit')">{{ $t('confirm') }}</el-button>
+                </el-form-item>
+              </el-col>
+              <!-- 头像 -->
+              <el-col :xs="24" :sm="24" :md="24" :lg="24">
+                <el-form-item :label="$t('avatar')" prop="picture" class="img-item">
+                  <img @click="changeAvatarImg" v-if="userInfo.picture" :src="userInfo.picture" class="avatar" />
+                  <i @click="changeAvatarImg" v-else class="el-icon-plus avatar-uploader-icon"></i>
+                </el-form-item>
+              </el-col>
+              <!-- 备注 -->
+             <!--  <el-col :xs="24" :sm="24" :md="24" :lg="24">
                 <el-form-item :label="$t('remark')" prop="remark" :show-message="fillForm.remarkIsEdit">
                   <span v-if="!fillForm.remarkIsEdit">{{ fillForm.remark }}</span>
                   <i class="el-icon-edit" v-if="!fillForm.remarkIsEdit" @click="fillForm.remarkIsEdit = true"></i>
@@ -59,7 +79,7 @@
                   <el-button type="cancel" v-if="fillForm.remarkIsEdit" @click="cancelEdit('remark')">{{ $t('cancel') }}</el-button>
                   <el-button type="primary" v-if="fillForm.remarkIsEdit" @click="changeInfo('remarkIsEdit')">{{ $t('confirm') }}</el-button>
                 </el-form-item>
-              </el-col>
+              </el-col> -->
             </el-row>
           </el-form>
           <h1 class="user_info_title">{{ $t('group') }}</h1>
@@ -67,37 +87,40 @@
             <el-row :gutter="10">
               <!-- 组织名称 -->
               <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                <el-form-item :label="$t('groupname')" prop="GroupName">
-                  <span>{{ groupInfo.GroupName }}</span>
+                <el-form-item :label="$t('groupname')" prop="name">
+                  <span>{{ groupInfo.name }}</span>
                 </el-form-item>
               </el-col>
               <!-- 组织代号 -->
               <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                <el-form-item :label="$t('groupcode')" prop="Code">
-                  <span>{{ groupInfo.Code }}</span>
+                <el-form-item :label="$t('groupcode')" prop="code">
+                  <span>{{ groupInfo.code }}</span>
                 </el-form-item>
               </el-col>
               <!-- 组织LOGO -->
               <el-col :xs="24" :sm="24" :md="24" :lg="24">
-                <el-form-item :label="$t('logo')" prop="Logo" class="img-item">
-                  <!-- <img v-if="groupInfo.Logo" :src="groupInfo.logo" class="avatar">
-                  <img v-else src="~@assets/images/logo.png" alt="" style="width:66px;height66px">-->
-                  <el-upload
-                    v-if="IsAdmin"
-                    class="avatar-uploader"
-                    accept="image/*"
-                    :data="fillForm"
-                    :action="logoFilePostUrl"
-                    :show-file-list="false"
-                    :on-success="handleLogoSuccess"
-                    :before-upload="beforeLogoUpload"
-                  >
-                    <img v-if="groupInfo.Logo" :src="groupInfo.Logo" class="logo" />
-                    <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-                  </el-upload>
-                  <img v-else-if="groupInfo.Logo" :src="groupInfo.Logo" class="logo" />
+                <!-- <el-form-item :label="$t('logo')" prop="logo" class="img-item">
+                  <img v-if="groupInfo.logo" :src="groupInfo.logo" class="avatar">
+                  <img v-else src="~@assets/images/logo.png" alt="" style="width:66px;height66px">
+                    <el-upload
+                      v-if="IsAdmin"
+                      class="avatar-uploader"
+                      accept="image/*"
+                      :data="fillForm"
+                      :action="logoFilePostUrl"
+                      :show-file-list="false"
+                      :on-success="handleLogoSuccess"
+                      :before-upload="beforeLogoUpload"
+                    >
+                      <i class="el-icon-plus avatar-uploader-icon"></i>
+                    </el-upload>
+                  <img v-else-if="groupInfo.logo" :src="groupInfo.logo" class="logo" />
                   <img v-else src="~@assets/images/logo.png" alt class="logo" />
-                </el-form-item>
+                </el-form-item> -->
+                 <el-form-item :label="$t('logo')" prop="picture" class="img-item">
+                    <img @click="changeGroupLogo" v-if="groupInfo.logo" :src="groupInfo.logo" class="avatar" />
+                    <i @click="changeGroupLogo" v-else class="el-icon-plus avatar-uploader-icon"></i>
+                  </el-form-item>
               </el-col>
             </el-row>
           </el-form>
@@ -125,17 +148,42 @@
       image-category="avatar"
       @upload-success="uploadAvatarSuccess"
     ></img-cropper-dialog>
+    <!-- 修改group logo -->
+    <img-cropper-dialog
+      v-model="isChangeGroupLogo"
+      :option="{ title: $t('upload') + $t('logo') }"
+      :form-data="editGroupLogoData"
+      image-category="logo"
+    ></img-cropper-dialog>
   </div>
 </template>
 <script>
 import { SEX_TYPE_DIC } from '@constants/dictionaries'
 import { IMAGE_URL, UPLOAD_CONFIG } from '@constants/index'
 import { $validate } from '@helper'
+import { mapGetters } from 'vuex'
+const phoneNumberReg = /^1[3456789]\d{9}$/
+const emailReg = /^([a-zA-Z0-9_\\.\-])+@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/
 // let self
 export default {
   name: 'user-info',
-
   data() {
+    const validatorEmail = (rule, value, callback) => {
+      if (value && !emailReg.test(value)) {
+        callback(new Error('邮箱格式不正确'))
+      } else {
+        callback()
+      }
+    }
+
+    const validatorPhone = (rule, value, callback) => {
+      if (value && !phoneNumberReg.test(value)) {
+        callback(new Error('手机号格式不正确'))
+      } else {
+        callback()
+      }
+    }
+
     return {
       loading: true,
       imgUrlPrefix: IMAGE_URL,
@@ -145,22 +193,44 @@ export default {
       logoFilePostUrl: UPLOAD_CONFIG.logoImageCof.url || UPLOAD_CONFIG.url,
       logoFileConfig: UPLOAD_CONFIG.logoImageCof,
       groupInfo: {
-        GroupName: '',
-        Logo: '',
-        Code: ''
+        code: 'hx',
+        description: null,
+        id: '',
+        logo: '',
+        name: ''
       },
       fillForm: {
-        bSex: '保密',
+        // bSex: '保密',
         bSexIsEdit: false,
-        UserName: '未填写',
+        userName: '未填写',
         UserNameIsEdit: false,
         remark: '未填写',
-        remarkIsEdit: false
+        remarkIsEdit: false,
+        emailIsEdit: false,
+        phoneIsEdit: false
       },
-      editAvatarImgData: { Picture: '', PictureName: '' },
+      editAvatarImgData: { picture: '', PictureName: 'xxx' },
       fillFormBak: {},
       rules: {
-        UserName: [
+        email: [
+          {
+            message: '请输入邮箱',
+            trigger: 'blur'
+          },
+          {
+            validator: validatorEmail
+          }
+        ],
+        phone: [
+          {
+            message: '请输入手机号',
+            trigger: 'blur'
+          },
+          {
+            validator: validatorPhone
+          }
+        ],
+        userName: [
           {
             required: true,
             message: '请输入昵称',
@@ -196,11 +266,17 @@ export default {
             trigger: 'blur'
           }
         ]
-      }
+      },
+      isChangeGroupLogo: false,
+      editGroupLogoData: {}
     }
   },
 
-  computed: {},
+  computed: {
+    ...mapGetters([
+      'IsAdmin'
+    ])
+  },
 
   components: {
     ChangePwdDialog: resolve => require.ensure([], () => resolve(require('@views/user/changePwd')), 'ChangePwdDialog')
@@ -220,17 +296,18 @@ export default {
       this.$apis.user
         .getUser()
         .then(result => {
-          result.bSex = String(result.bSex)
-          result.PictureName = result.Picture
-          result.Picture = result.Picture ? this.imgUrlPrefix + result.Picture + `?_=${this.$_.random(0, 99999)}` : null
-          this.fillForm = Object.assign({}, this.fillForm, result)
+          // result.bSex = String(result.bSex)
+          result.data.PictureName = result.data.picture
+          result.data.picture = result.data.picture ? this.imgUrlPrefix + '/' + result.data.picture + `?_=${this.$_.random(0, 99999)}` : null
+          result.data.picture = result.data.logo ? this.imgUrlPrefix + '/' + result.data.logo + `?_=${this.$_.random(0, 99999)}` : null
+          this.fillForm = Object.assign({}, this.fillForm, result.data)
           this.fillFormBak = JSON.parse(JSON.stringify(this.fillForm))
           // 获取组织信息
           this.$apis.group
-            .findByToken()
+            .findByToken(result.data.groupId)
             .then(result => {
-              result.Logo = result.Logo ? this.imgUrlPrefix + result.Logo + `?_=${this.$_.random(0, 99999)}` : null
-              this.groupInfo = result
+              result.data.logo = result.data.logo ? this.imgUrlPrefix + '/' + result.data.logo + `?_=${this.$_.random(0, 99999)}` : null
+              this.groupInfo = result.data
             })
             .catch(errMsg => {
               this.$message.error(errMsg)
@@ -246,7 +323,7 @@ export default {
     },
     // 头像上传回调
     uploadAvatarSuccess(img) {
-      this.$store.commit('$vuexSetUserPicture', img) // 更新vuex中的用户头像
+      // this.$store.commit('$vuexSetUserPicture', img) // 更新vuex中的用户头像
       this.handleRefresh() // 重新获取用户信息
     },
     // 上传logo
@@ -264,10 +341,11 @@ export default {
     },
     // 组织logo上传回调
     handleLogoSuccess(response, file) {
+      console.log(response)
       if (response) {
         if (response.Success === true) {
-          this.groupInfo.Logo = URL.createObjectURL(file.raw)
-          this.$store.commit('$vuexSetUserGroupLogo', this.groupInfo.Logo)
+          this.groupInfo.logo = URL.createObjectURL(file.raw)
+          this.$store.commit('$vuexSetUserGroupLogo', this.groupInfo.logo)
           this.$message.success(response.Message)
         } else {
           this.$message.error(response.Message)
@@ -288,10 +366,11 @@ export default {
         this.$apis.user
           .updateUser(this.fillForm)
           .then(result => {
-            this.$message.success(result.Message)
+            this.$message.success(result.message)
             this.fillForm[isEditFlag] = false
             this.fillFormBak = JSON.parse(JSON.stringify(this.fillForm))
-            this.userInfo.UserName = this.fillForm.UserName
+            this.userInfo.userName = this.fillForm.userName
+            this.$store.dispatch('getUserInfo')
           })
           .catch(errMsg => {
             console.error(errMsg)
@@ -308,11 +387,17 @@ export default {
     },
     // 修改用户头像
     changeAvatarImg() {
-      this.editAvatarImgData.Picture = this.fillForm.Picture
+      this.editAvatarImgData.picture = this.fillForm.picture
       this.editAvatarImgData.PictureName = this.fillForm.PictureName
       this.editAvatarImgData.Id = this.fillForm.Id
       this.isChangeAvatarImg = true
-    }
+    },
+    changeGroupLogo() {
+      this.isChangeGroupLogo = true
+    },
+  /*   uploadGroupLogoSuccess() {
+      
+    } */
   }
 }
 </script>

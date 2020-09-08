@@ -10,6 +10,9 @@
     <span slot="title" class="el-dialog__title">{{ option.title }}</span>
     <el-form :model="fillForm" :rules="rules" ref="fillForm">
       <div class="form-group col-sm-12">
+        <el-form-item label="旧密码" prop="oldPassword">
+          <el-input type="password" v-model="fillForm.oldPassword"></el-input>
+        </el-form-item>
         <el-form-item label="新密码" prop="Password">
           <el-input type="password" v-model="fillForm.Password"></el-input>
         </el-form-item>
@@ -38,10 +41,19 @@ export default {
       isVisible: false,
       roleTypeDic: ROLE_TYPE_DIC,
       fillForm: {
+        oldPassword: '',
         Password: '',
         PasswordAgain: ''
       },
       rules: {
+        oldPassword: [
+          {
+            type: 'string',
+            required: true,
+            ...$validate.LettersOrNumber(3, 10).rule(),
+            trigger: 'blur'
+          }
+        ],
         Password: [
           {
             type: 'string',

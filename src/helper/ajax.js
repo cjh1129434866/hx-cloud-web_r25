@@ -115,6 +115,17 @@ const removePending = ever => {
     }
   }
 }
+//保存token在header里面
+/* axios.interceptors.request.use(config => {
+  if(token) {
+    config.headers.Authorization = token;
+  }
+  return config
+},error => {
+  return Promise.reject(error)
+}) */
+
+
 
 // http request 拦截器
 axios.interceptors.request.use(
@@ -124,6 +135,10 @@ axios.interceptors.request.use(
       // 这里的ajax标识我是用请求地址&请求方式拼接的字符串，当然你可以选择其他的一些方式
       pending.push({ id: requestConfig.url, url: requestConfig.url, cancel: c })
     })
+  const token =   $utils.getCookie('token')
+    if(token){
+      requestConfig.headers.Authorization = "Bearer " + token
+    }
     return requestConfig
   },
   error => {
@@ -206,10 +221,10 @@ function requestHandle(requestConfig) {
       } else if (Object.prototype.toString.call(res.data) === '[object ArrayBuffer]' || Object.prototype.toString.call(res.data) === '[object Array]') {
         defer.resolve(res.data)
       } else if (res.data) {
-        if (res.data.Success) {
+        if (res.data.success) {
           defer.resolve(res.data)
         } else {
-          defer.reject(res.data.Message || 'data.Message is null or undefined')
+          defer.reject(res.data.message || 'data.Message is null or undefined')
         }
       } else {
         defer.reject('数据格式有误')
