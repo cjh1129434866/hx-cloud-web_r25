@@ -17,13 +17,8 @@ export default {
    * 添加客户信息
    * @param {FormData} param      参数
    */
-  uploadImage(url, param) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    param.append('account', account)
-    param.append('token', token)
-    // let data = { account, token }
-    return $ajax.uploadFile(url, param)
+  uploadImage(url, param, method) {
+    return $ajax.uploadFile(url, param, method)
   },
 
   /**

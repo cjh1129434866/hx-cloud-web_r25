@@ -306,9 +306,9 @@ export default {
       ...config
     })
   },
-  uploadFile(url, params) {
+  uploadFile(url, params, method) {
     return requestHandle({
-      method: 'post',
+      method: method,
       url: url,
       headers: {
         'Content-Type': 'multipart/form-data'

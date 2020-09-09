@@ -154,6 +154,7 @@
       :option="{ title: $t('upload') + $t('logo') }"
       :form-data="editGroupLogoData"
       image-category="logo"
+      method="put"
     ></img-cropper-dialog>
   </div>
 </template>
@@ -268,7 +269,7 @@ export default {
         ]
       },
       isChangeGroupLogo: false,
-      editGroupLogoData: {}
+      editGroupLogoData: {picture: '', PictureName: 'xxx'}
     }
   },
 

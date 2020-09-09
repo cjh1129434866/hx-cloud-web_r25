@@ -107,6 +107,10 @@ export default {
       default() {
         return []
       }
+    },
+    method: {
+      type: String,
+      default: 'post'
     }
   },
 
@@ -257,7 +261,7 @@ export default {
 
           param.append('file', data, this.fillForm.PictureName)
           this.$apis.file
-            .uploadImage(this.imgFilePostUrl, param)
+            .uploadImage(this.imgFilePostUrl, param, this.method)
             .then(result => {
               this.$emit('upload-success', img)
               this.$message.success(result.message)
