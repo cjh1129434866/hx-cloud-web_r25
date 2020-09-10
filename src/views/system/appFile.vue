@@ -27,6 +27,7 @@
               <el-upload
                 style="display:none;"
                 ref="upload"
+                :headers="headers"
                 :action="filePostUrl"
                 :accept="fileConfig.type"
                 :data="fileData"
@@ -36,6 +37,7 @@
                 :on-success="onFileSuccess"
                 :on-error="onFileError"
                 :on-progress="onFileProgress"
+                :http-request="customUpload"
               >
                 <el-button slot="trigger" size="small" type="primary"></el-button>
                 <el-button style="margin-left: 10px;" size="small" type="success"></el-button>
@@ -114,6 +116,7 @@ import { UPLOAD_CONFIG } from '@constants/index'
 // import { TYPE_FILE_DIC } from '@constants/dictionaries'
 import { $utils, $validate } from '@helper'
 import $apis from '@helper/apis'
+import axios from 'axios'
 
 export default {
   name: 'app-upgrade-file',
@@ -157,7 +160,12 @@ export default {
       filePostUrl: UPLOAD_CONFIG.appFileCof.url || UPLOAD_CONFIG.url,
       fileConfig: UPLOAD_CONFIG.appFileCof,
       fileData: {},
-      fileUploadProgress: 0
+      fileUploadProgress: 0,
+      headers: {
+        Authorization: 'Bearer ' + $utils.getCookie('token'),
+        'Content-Type': 'multipart/form-data'
+      },
+      formData: new FormData()
     }
   },
   computed: {},
@@ -173,8 +181,8 @@ export default {
     // 数据获取
     async getDataList(param) {
       const data = await $apis.file.getAppFilePageList(param)
-      this.appList = data.List
-      this.pageTotal = data.DataCount
+      this.appList = data.data
+      this.pageTotal = data.count
     },
     // 修改
     updateData(param) {
@@ -194,10 +202,15 @@ export default {
     // 新增
     addData(param) {
       this.fileData = JSON.parse(JSON.stringify(param))
-      this.fileData.account = $utils.getCookie('account')
-      this.fileData.token = $utils.getCookie('token')
+      this.formData.append('Description', this.fileData.Description)
+      this.formData.append('VersionNo', this.fileData.VersionNo)
+      this.formData.append('State', this.fileData.State)
+      this.formData.append('Type', this.fileData.Type)
       this.$nextTick(() => {
-        this.$refs.upload.submit() // 手动上传文件,上传成功后会回调 onFileSuccess
+        // this.$refs.upload.submit() // 手动上传文件,上传成功后会回调 onFileSuccess
+        axios.post(this.filePostUrl, this.formData, {headers: this.headers}).then(res => {
+          console.log(res)
+        })
       })
     },
     // ---------------------------------- 分页 ----------------------------------
@@ -223,7 +236,7 @@ export default {
     },
     // 新增按钮
     onAddClick() {
-      this.currentRowData = { _title: '新增', type: 0, State: false }
+      this.currentRowData = { _title: '新增', Type: 0, State: false }
       this.$refs.upload.$refs['upload-inner'].handleClick() // 手动选择文件
     },
     // 编辑按钮
@@ -266,7 +279,7 @@ export default {
     fileValidate(file) {
       const { type, size } = this.fileConfig
       // 根据文件类型('application/vnd.android.package-archive')，从typeDict中(['android', 'ios'])查找对应的索引
-      this.currentRowData.type = this.typeDict.findIndex(ele => file.raw.type.indexOf(ele) > -1)
+      this.currentRowData.Type = this.typeDict.findIndex(ele => file.raw.type.indexOf(ele) > -1)
       const isApk = type.indexOf(file.raw.type) > -1
       const isLtM = file.size / 1024 / 1024 < size
       if (!isApk) {
@@ -281,11 +294,16 @@ export default {
       this.fileData = {}
       this.fileUploadProgress = 0
     },
+    // 自定义上传
+    customUpload(file) {
+      console.log(file)
+    },
     onFileChange(file) {
       if (file.status === 'ready') {
         if (!this.fileValidate(file)) {
           this.$refs.upload.handleRemove(file) // 移除不通过验证的文件
         } else {
+          this.formData.append('File', file.raw)
           this.isDialogVisible = true // 显示新增弹窗
         }
       }

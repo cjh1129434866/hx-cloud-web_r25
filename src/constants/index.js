@@ -147,7 +147,7 @@ export const UPLOAD_CONFIG = {
   },
   // 移动端apk
   appFileCof: {
-    url: IMAGE_URL + '/api/AppVersion/AddVersion',
+    url: IMAGE_URL + '/api/appVersion',
     size: 100, // 设备升级文件大小, 单位MB
     unit: 'M',
     type: 'application/vnd.android.package-archive' // 升级文件类型

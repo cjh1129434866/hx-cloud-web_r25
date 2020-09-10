@@ -26,7 +26,7 @@ export default {
    */
   getAppFilePageList({ pageNo, pageSize, order, search, orderType }) {
     const data = { PageNo: pageNo, PageSize: pageSize, OrderBy: order, Search: search, OrderType: orderType }
-    return $ajax.post(serverUrl('appVersion'), data)
+    return $ajax.get(serverUrl('appVersion'), data)
   },
   /**
    * 获取最新app版本
