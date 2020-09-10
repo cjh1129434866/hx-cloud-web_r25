@@ -129,10 +129,9 @@ export default {
       searchForm: {
         pageSize: 0,
         pageNo: 1,
-        order: 'VersionNo',
-        orderType: 'desc',
-        search: '', // 针对 VersionNo 筛选
-        type: 0 // 类型，默认为0，表示android版本
+        order: 'VersionNo', // 排序字段
+        orderType: 'desc', // 排序类型
+        search: '', // 搜索字段 针对 VersionNo 筛选
       },
       typeDict: ['android', 'ios'], // 文件类型，以该数组对应的索引作为文件类型标识，即0代表安卓，1代表ios
       currentRowData: { _title: '新增' }, // 当前编辑的数据

@@ -37,7 +37,7 @@ if (window.location.pathname !== '/login' && window.location.pathname !== '/regi
       }
     }
     // 动态生成路由
-    $vueRouterGenerator.generator($userMenu, userInfo.IsAdmin)
+    $vueRouterGenerator.generator($userMenu, userInfo.isAdmin)
   })
 }
 

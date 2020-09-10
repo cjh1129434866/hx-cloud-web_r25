@@ -135,7 +135,7 @@ export default {
               // let user = await this.$store.dispatch('getUser')
               // let { userInfo, $userMenu } = user
               // // 动态生成菜单s
-              // $vueRouterGenerator.generator($userMenu, userInfo.IsAdmin)
+              // $vueRouterGenerator.generator($userMenu, userInfo.isAdmin)
               // this.$router.push('/common/home')
               // document.documentElement.requestFullscreen() // 全屏
 

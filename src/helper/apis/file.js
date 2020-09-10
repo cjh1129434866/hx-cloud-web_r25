@@ -24,11 +24,9 @@ export default {
   /**
    * 获取升级文件（分页）
    */
-  getAppFilePageList({ pageNo, pageSize, order, search, orderType, type }) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, pageNo, pageSize, order, search, orderType, type }
-    return $ajax.get(serverUrl('AppVersion/GetPage'), data)
+  getAppFilePageList({ pageNo, pageSize, order, search, orderType }) {
+    const data = { PageNo: pageNo, PageSize: pageSize, OrderBy: order, Search: search, OrderType: orderType }
+    return $ajax.post(serverUrl('appVersion'), data)
   },
   /**
    * 获取最新app版本
