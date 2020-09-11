@@ -16,10 +16,7 @@ export default {
    * 获取设备类型
    */
   getDeviceType() {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token }
-    return $ajax.get(serverUrl('DeviceType/GetDeviceType'), data)
+    return $ajax.get(serverUrl('Type'))
   },
   /**
    * 添加设备类型
@@ -29,11 +26,9 @@ export default {
    * @param {string} Description      设备类型描述
    * @param {number} Order            排序
    */
-  addDeviceType({ ICON, DeviceTypeName, ParentId, Description, Order }) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, ICON, DeviceTypeName, ParentId, Description, Order }
-    return $ajax.post(serverUrl('DeviceType/AddDeviceType'), data)
+  addDeviceType({ icon, typeName, parentId, description, Status }, GroupId) {
+    const data = { ICON: icon, TypeName: typeName, parentId, Description: description, Status, GroupId }
+    return $ajax.post(serverUrl('Type'), data)
   },
   /**
    * 修改设备类型
@@ -44,21 +39,16 @@ export default {
    * @param {string} Description      设备类型描述
    * @param {number} Order            排序
    */
-  updateDeviceType({ Id, ICON, DeviceTypeName, ParentId, Description, Order }) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, Id, ICON, DeviceTypeName, ParentId, Description, Order }
-    return $ajax.put(serverUrl('DeviceType/UpdateDeviceType'), data)
+  updateDeviceType({ id, icon, typeName, description }) {
+    const data = { TypeName: typeName, ICON: icon, Id: id, Description:description  }
+    return $ajax.put(serverUrl(`Type/${id}`), data)
   },
   /**
    * 删除设备类型
    * @param {number} id 设备类型标识
    */
   deviceTypeRemove(id) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, id }
-    return $ajax.post(serverUrl('DeviceType/DeviceTypeRemove'), data)
+    return $ajax.post(serverUrl(`Type/${id}`))
   },
   // ------------------ DeviceTypeStatisticsInfo(设备类型统计) ------------------
   /**

@@ -72,7 +72,7 @@ export default {
     // 统计类型
     const types = await $apis.deviceType.getDeviceType()
     // 统计配置
-    const typeStats = await $apis.deviceType.getGroupStatisticsList()
+    /* const typeStats = await $apis.deviceType.getGroupStatisticsList()
     // 将统计配置信息添加大到统计类型的_typeStatObj属性中
     types.List.map(_typeObj => {
       _typeObj._StatisticsInfo = {}
@@ -81,7 +81,7 @@ export default {
       }).map(_typeStatObj => {
         _typeObj._StatisticsInfo[_typeStatObj.Key] = _typeStatObj
       })
-    })
+    }) */
 
     commit('$vuexSetDeviceType', types.List)
     return types

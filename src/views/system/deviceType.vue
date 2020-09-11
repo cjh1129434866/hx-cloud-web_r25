@@ -103,26 +103,36 @@
       <span slot="title" class="el-dialog__title">{{ $t('adds') + $t('deviceType') }}</span>
       <el-form :model="fillForm" :rules="rules" ref="fillForm">
         <div class="form-group col-sm-11">
-          <el-form-item label="图标" prop="ICON">
+          <el-form-item label="图标" prop="icon">
             <el-popover ref="popoverIcon" placement="right" trigger="hover">
               <icon-list type="deviceType" @iconClick="iconClick"></icon-list>
             </el-popover>
-            <icon v-popover:popoverIcon class="input-icon icons" :name="fillForm.ICON"></icon>
+            <icon v-popover:popoverIcon class="input-icon icons" :name="fillForm.icon"></icon>
           </el-form-item>
         </div>
         <div class="form-group col-sm-11">
-          <el-form-item :label="$t('name')" prop="DeviceTypeName">
-            <el-input v-model="fillForm.DeviceTypeName"></el-input>
+          <el-form-item :label="$t('name')" prop="typeName">
+            <el-input v-model="fillForm.typeName"></el-input>
           </el-form-item>
         </div>
-        <div class="form-group col-sm-11">
+       <!--  <div class="form-group col-sm-11">
           <el-form-item :label="$t('order')" prop="Order">
             <el-input v-model="fillForm.Order"></el-input>
+          </el-form-item>
+        </div> -->
+        <div class="form-group col-sm-11" v-show="operation !== 'edit'">
+          <el-form-item :label="$t('Status')" prop="Status">
+            <el-select v-model="fillForm.Status" placeholder="请选择">
+              <el-option label="0" :value="0">
+              </el-option>
+              <el-option label="1" :value="1">
+              </el-option>
+            </el-select>
           </el-form-item>
         </div>
         <div class="form-group col-sm-11">
           <el-form-item :label="$t('description')" prop="Description">
-            <el-input v-model="fillForm.Description"></el-input>
+            <el-input v-model="fillForm.description"></el-input>
           </el-form-item>
         </div>
       </el-form>
@@ -152,20 +162,20 @@ export default {
       loading: true,
       isDialogVisible: false,
       fillForm: {
-        ICON: 'deviceType/chtank',
-        DeviceTypeName: '',
-        Description: '',
-        Order: 0
+        icon: 'deviceType/chtank',
+        typeName: '',
+        description: '',
+        Status: 0
       },
       rules: {
-        ICON: [
+        icon: [
           {
             required: true,
             message: this.$t('pleaseEnter') + this.$t('icon'), // '请输入ICON',
             trigger: 'blur'
           }
         ],
-        DeviceTypeName: [
+        typeName: [
           {
             required: true,
             message: this.$t('pleaseEnter') + this.$t('deviceType') + this.$t('name'), // '请输入设备类型名称',
@@ -178,7 +188,7 @@ export default {
             trigger: 'blur'
           }
         ],
-        Description: [
+        description: [
           {
             min: 2,
             max: 50,
@@ -192,11 +202,11 @@ export default {
       filterText: '',
       defauleLabelText: '',
       defaultProps: {
-        children: 'children',
-        label: 'DeviceTypeName'
+        children: 'child',
+        label: 'typeName'
       },
       validate: {
-        DeviceTypeName: {
+        typeName: {
           isValidate: false,
           validateMsg: ''
         }
@@ -215,7 +225,8 @@ export default {
       deviceParamPanelId: DEVICE_PARAM_PANEL,
       controDataPanelId: DEVICE_CONTROLDATA_PANEL,
       // 滚动条属性
-      barOption: BAR_OPTION
+      barOption: BAR_OPTION,
+      operation: ''
     }
   },
   computed: {},
@@ -262,7 +273,20 @@ export default {
       this.$store
         .dispatch('getDeviceType')
         .then(result => {
-          result.List.forEach(item => {
+          console.log(result);
+          result.data = (function fn(data) {
+            return data.map(item => {
+              if (item.child && item.child.length) {
+                item.child = fn(item.child)
+              }
+              return {
+                ...item,
+                icon: item.icon ? item.icon : ''
+              }
+            })
+          })(result.data);
+          console.log(result.data)
+          result.data.forEach(item => {
             self.tableData.push({
               ...item,
               // isEdit用来显示不同的操作按钮以及控制表格编辑框的显示:
@@ -275,7 +299,7 @@ export default {
               isSave: true,
               validate: this.$_.cloneDeep(this.validate)
             })
-            if (activeNode.data.Id === item.Id) {
+            if (activeNode.data.id === item.id) {
               this.$nextTick(() => {
                 activeNode.data = item
                 self.activeNode = activeNode
@@ -285,10 +309,11 @@ export default {
           })
           self.deviceTypeData = $utils.treeDataFormat({
             data: self.tableData,
-            idName: 'Id',
-            parentIdName: 'ParentId',
+            idName: 'id',
+            parentIdName: 'parentId',
             parentNodeflag: null
           })
+          console.log(self.deviceTypeData)
           if (activeTpl) {
             this.activeTpl = activeTpl
           }
@@ -308,7 +333,7 @@ export default {
     // icon图标click事件
     iconClick(iconName) {
       this.$refs.popoverIcon.doToggle()
-      this.fillForm.ICON = iconName
+      this.fillForm.icon = iconName ? iconName : ''
     },
 
     /* ---------------------------- tree component init --------------- */
@@ -363,7 +388,7 @@ export default {
       let treeNameEle = (
         <span>
           <span class="tree-name">
-            <icon name={data.ICON} />
+            <icon name={data.icon} />
             {node.label}
           </span>
         </span>
@@ -463,25 +488,27 @@ export default {
     },
 
     onAddClick() {
+      this.operation = 'append'
       this.fillForm = {
-        ICON: 'deviceType/chtank',
-        DeviceTypeName: '',
-        Description: '',
-        Order: 0
+        icon: 'deviceType/chtank',
+        typeName: '',
+        description: '',
+        Status: 0
       }
       this.isDialogVisible = true
     },
 
     // 添加按钮事件
     append(store, data) {
+      this.operation = 'append'
       const newData = {
-        Id: self.$_.uniqueId(),
-        ICON: data.ICON,
-        DeviceTypeName: self.defauleLabelText,
-        Description: '',
-        Order: 0,
-        ParentId: data.Id,
-        children: [],
+        id: self.$_.uniqueId(),
+        icon: data.icon ? data.icon : '',
+        typeName: self.defauleLabelText,
+        description: '',
+        Status: 0,
+        parentId: data.id,
+        child: [],
         isEdit: true,
         isSave: false,
         validate: self.$_.cloneDeep(this.validate)
@@ -498,27 +525,22 @@ export default {
 
     // 删除按钮事件
     delete(data) {
-      const { Id, DeviceTypeName } = data
-
-      this.$confirm(`是否删除【${DeviceTypeName}】设备？`, '提示', {
-        cancelButtonClass: 'el-button--cancel',
-        closeOnClickModal: false
+      this.operation = 'delete'
+      const { id, typeName } = data
+      this.$confirm(`是否删除【${typeName}】设备？`, '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(_ => {
+        this.$apis.deviceType
+          .deviceTypeRemove(id)
+          .then(result => {
+            this.$message.success(result.message)
+            this.handleRefresh()
+          })
+      }).catch(err => {
+        this.$message.warning(`取消删除【${typeName}】设备`)
       })
-        .then(() => {
-          this.$apis.deviceType
-            .deviceTypeRemove(Id)
-            .then(result => {
-              this.$message.success(result.message)
-              this.handleRefresh()
-            })
-            .catch(errMsg => {
-              this.$message.error(errMsg)
-              console.error(errMsg)
-            })
-        })
-        .catch(() => {
-          this.$message.warning(`取消删除【${DeviceTypeName}】设备`)
-        })
     },
 
     // 取消按钮事件
@@ -529,14 +551,14 @@ export default {
 
     // 编辑按钮事件
     edit(data) {
-      // this.originalValue = data[this.defaultProps.label]
-      // data.isEdit = true
+      this.operation = 'edit'
       this.fillForm = JSON.parse(JSON.stringify(data)) // data
       this.isDialogVisible = true
     },
 
     // 保存按钮事件
     save(data) {
+      console.log(data)
       if (this.inputValidate(data, self.defaultProps.label)) {
         const { isSave } = data
         if (isSave) {
@@ -554,7 +576,7 @@ export default {
         } else {
           // 新增
           this.$apis.deviceType
-            .addDeviceType(data)
+            .addDeviceType(data, this.$store.state.userInfo.groupId)
             .then(result => {
               this.$message.success(result.message)
               this.handleRefresh()
@@ -588,7 +610,7 @@ export default {
         } else {
           // 新增
           this.$apis.deviceType
-            .addDeviceType(this.fillForm)
+            .addDeviceType(this.fillForm, this.$store.state.userInfo.groupId)
             .then(result => {
               this.$message.success(result.message)
               this.isDialogVisible = false

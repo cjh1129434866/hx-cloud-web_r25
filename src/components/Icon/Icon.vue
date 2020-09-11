@@ -34,10 +34,9 @@ export default {
   props: {
     name: {
       type: String,
-      required: true,
       default: 'tips',
       validator(val) {
-        return Icons[val]
+        return val ? Icons[val] : Icons['tips']
       }
     },
     linearGradient: {
