@@ -41,20 +41,15 @@ export default {
   /**
    * 修改版本信息（只能修改版本描述和是否强制升级）
    */
-  editAppFile({ Id, Description, State }) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, Id, Description, State }
-    return $ajax.put(serverUrl('AppVersion/Modify'), data)
+  editAppFile({ id, Description, VersionNo, State, type }) {
+    const data = { Id: id, Description, State: !!State, VersionNo, Type: type }
+    return $ajax.put(serverUrl('appVersion'), data)
   },
   /**
    * 删除版本信息
    * @param {number} id 版本标识
    */
   delAppFile(id) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, id }
-    return $ajax.delete(serverUrl('AppVersion/delete'), data)
+    return $ajax.delete(serverUrl(`appVersion/${id}`))
   }
 }

@@ -48,19 +48,19 @@
         <el-card v-loading.body="isLoading">
           <el-table :data="appList" border>
             <el-table-column type="index" width="80"></el-table-column>
-            <el-table-column prop="Type" label="类型" min-width="150">
-              <template v-slot="scope">{{ typeDict[scope.row.Type] }}</template>
+            <el-table-column prop="type" label="类型" min-width="150">
+              <template v-slot="scope">{{ typeDict[scope.row.type] }}</template>
             </el-table-column>
-            <el-table-column prop="VersionNo" label="版本" min-width="150"></el-table-column>
-            <el-table-column prop="Description" label="描述" min-width="150"></el-table-column>
-            <el-table-column prop="State" label="是否强制升级" min-width="150">
-              <template v-slot="scope">{{ scope.row.State ? '是' : '否' }}</template>
+            <el-table-column prop="versionNo" label="版本" min-width="150"></el-table-column>
+            <el-table-column prop="description" label="描述" min-width="150"></el-table-column>
+            <el-table-column prop="state" label="是否强制升级" min-width="150">
+              <template v-slot="scope">{{ scope.row.state ? '是' : '否' }}</template>
             </el-table-column>
-            <el-table-column prop="Date" label="日期" min-width="150"></el-table-column>
+            <el-table-column prop="address" label="下载地址" min-width="150" show-overflow-tooltip></el-table-column>
             <el-table-column label="操作" min-width="250">
               <template v-slot="scope">
                 <el-button @click="onEditClick(scope.row)" type="primary" size="small">编辑</el-button>
-                <el-button @click="onDelClick(scope.row.Id)" type="danger" size="small">删除</el-button>
+                <el-button @click="onDelClick(scope.row.id)" type="danger" size="small">删除</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -104,7 +104,7 @@
       </el-form>
       <span slot="footer">
         <el-button type="cancel" @click="isDialogVisible = false" :disabled="fileUploadProgress != 0"> {{ $t('cancel') }}</el-button>
-        <el-button type="primary" @click="onSureClick(currentRowData)" :disabled="fileUploadProgress != 0"> {{ $t('confirm') }}</el-button>
+        <el-button type="primary" @click="onSureClick(currentRowData)" :loading="secondClick" :disabled="fileUploadProgress != 0"> {{ $t('confirm') }}</el-button>
       </span>
     </el-dialog>
   </div>
@@ -165,7 +165,8 @@ export default {
         Authorization: 'Bearer ' + $utils.getCookie('token'),
         'Content-Type': 'multipart/form-data'
       },
-      formData: new FormData()
+      formData: new FormData(),
+      secondClick: false
     }
   },
   computed: {},
@@ -186,17 +187,17 @@ export default {
     },
     // 修改
     updateData(param) {
+      console.log(param)
       $apis.file
         .editAppFile(param)
         .then(result => {
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
           this.isDialogVisible = false
           this.getDataList(this.searchForm)
         })
         .catch(errMsg => {
           this.$message.error(String(errMsg))
           this.isDialogVisible = false
-          console.error(errMsg)
         })
     },
     // 新增
@@ -209,7 +210,19 @@ export default {
       this.$nextTick(() => {
         // this.$refs.upload.submit() // 手动上传文件,上传成功后会回调 onFileSuccess
         axios.post(this.filePostUrl, this.formData, {headers: this.headers}).then(res => {
-          console.log(res)
+          if (res.data.success) {
+            this.$message.success(res.data.message)
+            this.isDialogVisible = false
+            this.formData = new FormData()
+            this.getDataList(this.searchForm) // 刷新列表
+          } else {
+            this.$message.warning(res.data.message)
+          }
+          this.secondClick = false
+        }).catch(_ => {
+          this.$message.warning('添加文件失败')
+          this.secondClick = false
+          this.formData = new FormData()
         })
       })
     },
@@ -252,12 +265,11 @@ export default {
           $apis.file
             .delAppFile(id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.getDataList(this.searchForm)
             })
             .catch(errMsg => {
               this.$message.error(errMsg)
-              console.error(errMsg)
             })
         })
         .catch(() => {
@@ -266,9 +278,13 @@ export default {
     },
     // 提交按钮
     onSureClick(param) {
+      if (this.secondClick) {
+        return
+      }
       this.$refs.editForm.validate(valid => {
         if (!valid) return
-        if (param.Id) {
+        this.secondClick = true
+        if (param.id) {
           this.updateData(param)
         } else {
           this.addData(param)
