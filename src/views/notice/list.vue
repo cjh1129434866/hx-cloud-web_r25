@@ -406,7 +406,7 @@ export default {
           this.$apis.warn
             .warnDelete(Id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {
@@ -425,7 +425,7 @@ export default {
           this.$apis.warn
             .warnSave(this.currentRowData)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
               this.isHandleVisible = false
             })

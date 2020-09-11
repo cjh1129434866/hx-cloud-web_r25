@@ -121,7 +121,7 @@ export default {
                 this.$router.push('/login')
               }
             })
-            // this.$message.success(result.Message)
+            // this.$message.success(result.message)
             // this.isVisible = false
           })
           .catch(errMsg => {

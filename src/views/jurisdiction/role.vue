@@ -199,7 +199,7 @@ export default {
       this.$apis.role
         .add(data)
         .then(result => {
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
           this.handleRefresh()
         })
         .catch(errMsg => {
@@ -219,7 +219,7 @@ export default {
       this.$apis.role
         .update(data)
         .then(result => {
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
           this.handleRefresh()
         })
         .catch(errMsg => {
@@ -234,7 +234,7 @@ export default {
           this.$apis.role
             .delete(deviceSn)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {

@@ -331,7 +331,7 @@ export default {
           this.$apis.permission
             .addOrUpdateRoleProject({ roleId: this.pdata.Id, projectId: project.join(), typeid: type.join() })
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.onClose()
             })
             .catch(errMsg => {

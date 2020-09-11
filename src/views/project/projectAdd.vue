@@ -390,7 +390,7 @@ export default {
         this.$apis.project
           .projectAdd(data)
           .then(result => {
-            this.$message.success(result.Message)
+            this.$message.success(result.message)
             this.isVisible = false
             this.$emit('dispatch-data', data)
           })

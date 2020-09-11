@@ -381,7 +381,7 @@ export default {
       this.$apis.project
         .projectImageRemove({ Id: fileId, ProjectId: this.editImgData.projectId })
         .then(result => {
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
           this.refreshPage(this.currentEditIndex)
           // 页面数据重新加载时不会更新 editImgList 和 editImgData，故需手动更新 editImgList 和 editImgData
           // 删除文件列表中被删除的图片
@@ -416,7 +416,7 @@ export default {
           this.$apis.project
             .deleteProject(Id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.refreshPage(this.currentEditIndex, 1)
             })
             .catch(errMsg => {
@@ -463,7 +463,7 @@ export default {
       this.$apis.project
         .updateProject(this.currentEditData)
         .then(result => {
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
           this.isMapEditVisible = false
         })
         .catch(errMsg => {

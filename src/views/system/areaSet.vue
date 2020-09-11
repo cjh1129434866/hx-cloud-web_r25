@@ -36,13 +36,11 @@
                 <el-tree
                   :data="regions"
                   :props="{
-                    label: 'Name',
-                    children: 'zones'
+                    label: 'name',
+                    children: 'child'
                   }"
-                  :load="loadRegions"
-                  node-key="Code"
+                  node-key="id"
                   @check-change="handleCheckChange"
-                  lazy
                   show-checkbox
                   ref="regionsTree"
                 ></el-tree>
@@ -143,11 +141,14 @@ export default {
       this.contextMenuInit()
     },
     async parentOverlay(newVal) {
+      console.log(newVal)
       if (newVal) {
-        this.regions = newVal.data.regionsList
+        const regionsList = await this.$apis.areaRegion.getListArea(newVal.data.Id, this.$store.state.userInfo.groupId)
+        this.regions = regionsList.data
+        console.log(this.regions)
       } else {
-        const regionsList = await this.$apis.areaRegion.getListArea(0)
-        this.regions = regionsList.Data
+        const regionsList = await this.$apis.areaRegion.getListArea(101, this.$store.state.userInfo.groupId)
+        this.regions = regionsList.data
       }
     },
     $theme(newVal) {
@@ -208,6 +209,7 @@ export default {
             __this.mapObj.add(e.obj)
           }
           // 为覆盖物对象添加 "名称" 和 "右键点击事件"
+          console.log(e.obj)
           __this.addPostData(e.obj) // 新增
         })
       })
@@ -252,7 +254,8 @@ export default {
       }
     },
     // 异步加载子级地域
-    async loadRegions(node, resolve) {
+    /* async loadRegions(node, resolve) {
+      console.log(node)
       let regionsList
       if (node.level === 0) {
         regionsList = await this.$apis.areaRegion.getListArea(0)
@@ -260,27 +263,29 @@ export default {
           regionsList = { Data: this.parentOverlay.data.regionsList }
         }
       } else {
-        regionsList = await this.$apis.areaRegion.getListArea(node.data.Code)
+        console.log(node)
+        regionsList = await this.$apis.areaRegion.getListArea(node.data.id)
       }
-      return resolve(regionsList.Data)
-    },
+      return resolve(regionsList.data)
+    }, */
     // 初始化区域
     async mapAreaInit(zoom) {
       try {
-        const data = await this.$apis.areaRegion.findListRegion(this.initCode)
+        const data = await this.$apis.areaRegion.findListRegion(this.initCode, this.$store.state.userInfo.groupId)
         zoom = zoom - this.zoom + 2
         this.mapObj.clearMap() // 清除所有的覆盖物
         // 格式化覆盖物数据
-        data.Data.forEach((item, index) => {
-          if (item.Id !== this.initCode) {
+        data.data.child.forEach((item, index) => {
+          if (item.id !== this.initCode && item.radius) {
             item = {
-              Id: item.Id,
-              AreaPathObj: JSON.parse(item.Radius),
-              AreaName: item.Name,
-              code: item.Id,
-              parentCode: item.ParentId,
-              regionsList: item.Area,
-              FullPath: item.FullPath
+              Id: item.id,
+              AreaPathObj: JSON.parse(item.radius),
+              AreaName: item.name,
+              code: item.id,
+              parentCode: item.parentId,
+              regionsList: item.child,
+              FullPath: item.fullPath,
+              Point: item.point
             }
             // 生成覆盖物
             const thisOverlays = this.overlays_type_config[item.AreaPathObj.type].init(item.AreaPathObj)
@@ -310,6 +315,7 @@ export default {
     // 新增、编辑提交时的附属信息
     addPostData(obj, isUpdate) {
       this.isUpdate = isUpdate
+      console.log(obj.getOptions())
       const { path, center, radius } = obj.getOptions()
       // 判断区域是否符合规范（半径大于1，组成路径的所有点不在同一位置）
       const isCanSave =
@@ -430,15 +436,17 @@ export default {
             data.Id = this.selectOverlay.data.Id
             data.AreaPathObj.type = this.selectOverlay.type
             data.AreaPathObj = JSON.stringify(data.AreaPathObj)
-            const result = await this.$apis.areaRegion.regionSave(data)
-            this.$message.info(result.Message)
+            console.log(data)
+            const result = await this.$apis.areaRegion.regionSave(data, this.$store.state.userInfo.groupId)
+            this.$message.info(result.message)
           } else {
             // 新增
             data.AreaCode = this.getRegionsCode().toString()
             data.AreaPathObj.type = this.areaType
             data.AreaPathObj = JSON.stringify(data.AreaPathObj)
-            const result = await this.$apis.areaRegion.regionAdd(data)
-            this.$message.info(result.Message)
+            console.log(data)
+            const result = await this.$apis.areaRegion.regionAdd(data, this.$store.state.userInfo.groupId)
+            this.$message.info(result.message)
           }
           this.isDialogVisible = false
           // 修改、新增区域后重新加载区域,为了给新增的区域绑定事件
@@ -484,8 +492,8 @@ export default {
       this.mapObj.remove(this.selectOverlay.obj)
       this.mapObj.remove(this.selectOverlay.textMark)
       try {
-        const result = await this.$apis.areaRegion.regionRemove(this.selectOverlay.data.code)
-        this.$message.info(result.Message)
+        const result = await this.$apis.areaRegion.regionRemove(this.selectOverlay.data.code, this.$store.state.userInfo.groupId)
+        this.$message.info(result.message)
       } catch (error) {
         // 区域删除失败后后重新加载区域,为了还原删除的区域
         this.mapAreaInit(this.mapObj.getZoom())

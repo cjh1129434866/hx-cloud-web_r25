@@ -203,7 +203,7 @@ export default {
             .updateDeviceVideo(this.fillForm)
             .then(result => {
               this.$emit('onSureClickCallBack')
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               // this.refreshVideoPanel(true)
             })
             .catch(errMsg => {
@@ -216,7 +216,7 @@ export default {
             .deviceVideoAdd(this.fillForm)
             .then(result => {
               this.$emit('onSureClickCallBack')
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               // this.refreshVideoPanel(true)
             })
             .catch(errMsg => {

@@ -328,7 +328,7 @@ export default {
           // this.$apis.image
           //   .typeImageSave(rowData)
           //   .then(result => {
-          //     this.$message.success(result.Message)
+          //     this.$message.success(result.message)
           //     rowData.isEdit = false
           //   })
           //   .catch(errMsg => {
@@ -356,7 +356,7 @@ export default {
           self.$apis.deviceType
             .typeUpdateFileDelete(id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.$delete(self.baseData, index)
               this.$emit('handleRefresh', this.activeNode) // 调用父组件deviceType.vue 的更新方法 handleRefresh
             })

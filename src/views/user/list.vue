@@ -239,7 +239,7 @@ export default {
       this.$apis.user
         .addUser(data)
         .then(result => {
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
           this.handleRefresh()
         })
         .catch(errMsg => {
@@ -283,7 +283,7 @@ export default {
       this.$apis.user
         .checkUser({ id, valid })
         .then(result => {
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
           this.handleRefresh()
         })
         .catch(errMsg => {

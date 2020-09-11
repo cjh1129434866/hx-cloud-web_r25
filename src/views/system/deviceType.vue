@@ -508,7 +508,7 @@ export default {
           this.$apis.deviceType
             .deviceTypeRemove(Id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {
@@ -544,7 +544,7 @@ export default {
           this.$apis.deviceType
             .updateDeviceType(data)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {
@@ -556,7 +556,7 @@ export default {
           this.$apis.deviceType
             .addDeviceType(data)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {
@@ -577,7 +577,7 @@ export default {
           this.$apis.deviceType
             .updateDeviceType(this.fillForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -590,7 +590,7 @@ export default {
           this.$apis.deviceType
             .addDeviceType(this.fillForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })

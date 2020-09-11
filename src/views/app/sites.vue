@@ -393,7 +393,7 @@ export default {
       this.$apis.project
         .projectImageRemove({ Id: fileId, ProjectId: this.editImgData.projectId })
         .then(result => {
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
           this.refreshPage(this.currentEditIndex)
           // 删除文件列表中被删除的图片
           this.editImgList = this.$_.remove(this.editImgList, n => {
@@ -427,7 +427,7 @@ export default {
           this.$apis.project
             .deleteProject(Id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.refreshPage(this.currentEditIndex, 1)
             })
             .catch(errMsg => {
@@ -474,7 +474,7 @@ export default {
       this.$apis.project
         .updateProject(this.currentEditData)
         .then(result => {
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
           this.isMapEditVisible = false
         })
         .catch(errMsg => {

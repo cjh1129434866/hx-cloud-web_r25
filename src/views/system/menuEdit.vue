@@ -216,7 +216,7 @@ export default {
           this.$apis.sysMenu
             .update(this.fillForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.$emit('dispatch-data', this.fillForm)
               this.isVisible = false
             })
@@ -228,7 +228,7 @@ export default {
           this.$apis.sysMenu
             .add(this.fillForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.$emit('dispatch-data', this.fillForm)
               this.isVisible = false
             })

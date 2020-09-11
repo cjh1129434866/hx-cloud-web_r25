@@ -245,7 +245,7 @@ export default {
           // 更新
           DeviceApi.deviceConfigSave(data)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.getConfigData()
               this.onDataChange()
               rowData.isEdit = false
@@ -258,7 +258,7 @@ export default {
           // 新增
           DeviceApi.deviceConfigAdd(data)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.getConfigData()
               this.onDataChange()
               rowData.isEdit = false // 禁止编辑
@@ -282,7 +282,7 @@ export default {
         .then(() => {
           DeviceApi.deviceConfigRemove(id, deviceSn)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.$delete(this.baseData, index)
               this.getConfigData()
               this.onDataChange()

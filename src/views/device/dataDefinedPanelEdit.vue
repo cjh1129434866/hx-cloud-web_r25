@@ -388,7 +388,7 @@ export default {
           this.$apis.deviceDataDefine
             .updateDeviceDataDefine(data)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.onDataChange()
               rowData.isEdit = false
             })
@@ -401,7 +401,7 @@ export default {
           this.$apis.deviceDataDefine
             .deviceDataDefineAdd(data)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.onDataChange()
               rowData.isEdit = false // 禁止编辑
               rowData.isSave = true // 已经保存
@@ -425,7 +425,7 @@ export default {
           this.$apis.deviceDataDefine
             .deleteDeviceDataDefine(id, deviceSn)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.$delete(this.baseData, index)
               this.onDataChange()
             })

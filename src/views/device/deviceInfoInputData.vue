@@ -618,7 +618,7 @@ export default {
           const result = await this.$apis.deviceInputData.deviceInputDataAdd(this.inputDataForm)
           this.isInputDataEditVisible = false
           this.handleRefresh()
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
         } catch (errMsg) {
           this.$message.error(errMsg)
           console.error(errMsg)
@@ -634,7 +634,7 @@ export default {
           this.$apis.deviceInputData
             .deviceInputDataRemove(id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {

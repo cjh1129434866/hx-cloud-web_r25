@@ -345,7 +345,7 @@ export default {
           this.$apis.deviceType
             .addTemplateProfile(data)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -358,7 +358,7 @@ export default {
           this.$apis.deviceType
             .modifyTemplateProfile(data)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -410,7 +410,7 @@ export default {
           this.$apis.deviceType
             .removeTemplateProfile(this.fillForm.TempId, profileId)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {

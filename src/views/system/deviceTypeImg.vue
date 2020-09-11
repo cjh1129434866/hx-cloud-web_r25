@@ -243,7 +243,7 @@ export default {
           this.$apis.image
             .typeImageSave(rowData)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               rowData.isEdit = false
             })
             .catch(errMsg => {
@@ -272,7 +272,7 @@ export default {
           self.$apis.image
             .typeImageDelete(id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.$delete(self.baseData, index)
             })
             .catch(errMsg => {

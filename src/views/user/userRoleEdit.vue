@@ -111,7 +111,7 @@ export default {
             userId: this.fillForm.Id,
             roleId: this.fillForm.RoleId
           })
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
           this.$emit('dispatch-data', this.fillForm)
           this.isVisible = false
         } catch (errMsg) {

@@ -241,7 +241,7 @@ export default {
           this.$apis.deviceType
             .addSchema(data)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -254,7 +254,7 @@ export default {
           this.$apis.deviceType
             .updateSchema(data)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -302,7 +302,7 @@ export default {
           this.$apis.deviceType
             .removeSchema(rowData.Id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {

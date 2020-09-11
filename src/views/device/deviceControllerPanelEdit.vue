@@ -482,7 +482,7 @@ export default {
           DeviceAccessoryApi.saveDeviceAccessory(rowData)
             .then(result => {
               this.onDataChange()
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               rowData.isEdit = false
             })
             .catch(errMsg => {
@@ -494,7 +494,7 @@ export default {
           DeviceAccessoryApi.deviceAccessoryAdd(rowData)
             .then(result => {
               this.onDataChange()
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               rowData.isEdit = false // 禁止编辑
               rowData.isSave = true // 已经保存
               rowData.Id = result.Id // 设置id
@@ -527,7 +527,7 @@ export default {
           DeviceAccessoryApi.removeDeviceAccessory(id, deviceSn)
             .then(result => {
               this.onDataChange()
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.$delete(this.deviceAccessory, index)
               this.activeAcc = { Id: '' }
             })
@@ -615,7 +615,7 @@ export default {
           DeviceApi.updateDeviceControlData(rowData)
             .then(result => {
               this.onDataChange()
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               rowData.isEdit = false
             })
             .catch(errMsg => {
@@ -628,7 +628,7 @@ export default {
           DeviceApi.deviceControlDataAdd(rowData)
             .then(result => {
               this.onDataChange()
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               rowData.isEdit = false // 禁止编辑
               rowData.isSave = true // 已经保存
               rowData.Id = result.Id // 设置id
@@ -661,7 +661,7 @@ export default {
           DeviceApi.deleteDeviceControlData(id, deviceSn)
             .then(result => {
               this.onDataChange()
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.$delete(this.baseData, index)
             })
             .catch(errMsg => {
@@ -678,7 +678,7 @@ export default {
       rowData.IState = IState
       try {
         const result = await DeviceApi.updateDeviceControlData(rowData)
-        this.$message.success(result.Message)
+        this.$message.success(result.message)
       } catch (errMsg) {
         this.$message.error(errMsg)
         console.error(errMsg)

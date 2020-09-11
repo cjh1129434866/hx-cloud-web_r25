@@ -257,7 +257,7 @@ export default {
           this.$apis.sysMenu
             .delete(id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {

@@ -255,7 +255,7 @@ export default {
           this.$apis.warn
             .saveWarnType(this.currentRowData)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
               this.isVisible = false
             })
@@ -267,7 +267,7 @@ export default {
           this.$apis.warn
             .addWarnType(this.currentRowData)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
               this.isVisible = false
             })
@@ -286,7 +286,7 @@ export default {
           this.$apis.warn
             .removeWarnType(id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {

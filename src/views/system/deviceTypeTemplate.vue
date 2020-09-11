@@ -243,7 +243,7 @@ export default {
           this.$apis.deviceType
             .typeTemplateAdd(this.fillForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -256,7 +256,7 @@ export default {
           this.$apis.deviceType
             .typeTemplateModify(this.fillForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -287,7 +287,7 @@ export default {
           this.$apis.deviceType
             .deviceTypeTemplateRemove(TempId)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {

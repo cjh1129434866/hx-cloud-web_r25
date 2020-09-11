@@ -159,7 +159,7 @@ export default {
           this.$apis.deviceType
             .addTemplateArgs(this.fillForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -172,7 +172,7 @@ export default {
           this.$apis.deviceType
             .saveTemplateArgs(this.fillForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -190,7 +190,7 @@ export default {
           this.$apis.deviceType
             .removeTemplateArgs(id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {

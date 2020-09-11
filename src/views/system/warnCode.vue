@@ -232,7 +232,7 @@ export default {
           this.$apis.warn
             .warnCodeSave(this.currentRowData)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
               this.isVisible = false
             })
@@ -244,7 +244,7 @@ export default {
           this.$apis.warn
             .warnCodeAdd(this.currentRowData)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
               this.isVisible = false
             })
@@ -263,7 +263,7 @@ export default {
           this.$apis.warn
             .warnCodeRemove(code)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {

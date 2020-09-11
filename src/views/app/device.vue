@@ -500,7 +500,7 @@ export default {
       this.$apis.device
         .updateDevcie(data)
         .then(result => {
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
           this.currentEditData = data
           this.$set(this.mapDataOrig, this.currentEditIndex, data)
         })
@@ -522,7 +522,7 @@ export default {
           this.$apis.device
             .removeDeviceProject(DeviceSn)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.mapDataOrig.splice(this.currentEditIndex, 1)
             })
             .catch(errMsg => {
@@ -562,7 +562,7 @@ export default {
       // this.$apis.device
       //   .deviceAdd(data)
       //   .then(result => {
-      //     this.$message.success(result.Message)
+      //     this.$message.success(result.message)
       //     this.getAllData()
       //   })
       //   .catch(errMsg => {

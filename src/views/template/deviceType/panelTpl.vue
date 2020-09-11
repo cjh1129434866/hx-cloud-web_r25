@@ -201,7 +201,7 @@ export default {
           this.$apis.deviceType
             .addTemplatePanel(this.fillForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -214,7 +214,7 @@ export default {
           this.$apis.deviceType
             .saveTemplatePanel(this.fillForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -232,7 +232,7 @@ export default {
           this.$apis.deviceType
             .removeTemplatePanel(id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {

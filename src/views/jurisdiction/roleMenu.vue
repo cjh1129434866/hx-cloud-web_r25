@@ -182,7 +182,7 @@ export default {
           this.$apis.permission
             .addOrUpdateRoleMenu({ roleId: this.pdata.Id, menu: menu.join(), type: type.join() })
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.onClose()
             })
             .catch(errMsg => {

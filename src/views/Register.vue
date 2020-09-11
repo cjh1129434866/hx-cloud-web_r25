@@ -221,7 +221,7 @@ export default {
           this.$apis.user
             .register(this.User)
             .then(result => {
-              this.$message.success(`${result.Message},请加入或创建组织`)
+              this.$message.success(`${result.message},请加入或创建组织`)
               if (this.active <= 2) this.active++
             })
             .catch(errMsg => {
@@ -250,7 +250,7 @@ export default {
                 .add({ ...this.User, ...this.newGroup })
                 .then(result => {
                   this.isAllSuccess = true
-                  this.allSuccessMessage = result.Message
+                  this.allSuccessMessage = result.message
                 })
                 .catch(errMsg => {
                   this.$message.error(errMsg)
@@ -308,7 +308,7 @@ export default {
             .userUpdateToken({ Account: this.User.Account, GroupName: groupName })
             .then(result => {
               this.isAllSuccess = true
-              this.allSuccessMessage = result.Message
+              this.allSuccessMessage = result.message
             })
             .catch(errMsg => {
               this.$message.error(errMsg)

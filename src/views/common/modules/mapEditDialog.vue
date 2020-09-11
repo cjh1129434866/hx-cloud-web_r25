@@ -237,7 +237,7 @@ export default {
       // this.$apis.device
       //   .updateDevicePosition(this.deviceSn, this.fillForm.Position)
       //   .then(result => {
-      //     this.$message.success(result.Message)
+      //     this.$message.success(result.message)
       //     this.$emit('dispatch-data', this.fillForm)
       //     this.isVisible = false
       //   })

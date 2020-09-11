@@ -383,7 +383,7 @@ export default {
           this.$apis.deviceType
             .typeStatisticsInfoAdd(data)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -395,7 +395,7 @@ export default {
           this.$apis.deviceType
             .typeStatisticsInfoSave(data)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -440,7 +440,7 @@ export default {
               TypeId: rowData.TypeId
             })
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {

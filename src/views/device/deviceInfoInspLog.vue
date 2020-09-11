@@ -194,7 +194,7 @@ export default {
           const result = await this.$apis.log.repairAdd(this.repairForm)
           this.isRepairEditVisible = false
           this.init()
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
         } catch (errMsg) {
           this.$message.error(errMsg)
           console.error(errMsg)
@@ -212,7 +212,7 @@ export default {
           const result = await this.$apis.log.pollAdd(this.pollForm)
           this.isPollEditVisible = false
           this.init()
-          this.$message.success(result.Message)
+          this.$message.success(result.message)
         } catch (errMsg) {
           this.$message.error(errMsg)
           console.error(errMsg)

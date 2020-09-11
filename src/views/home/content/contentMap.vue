@@ -118,7 +118,7 @@ export default class ContentMap extends Vue {
   async created() {
     try {
       // 区域
-      const regionsList: AllDataListVO2<AreaRegionVO> = await AreaRegionApi.findListRegion(REGION_TOP_CODE)
+      const regionsList: AllDataListVO2<AreaRegionVO> = await AreaRegionApi.findListRegion(REGION_TOP_CODE, this.$store.state.userInfo.groupId)
       // 区域字典
       for (const i of regionsList.Data) {
         this.regionsDict[i.Id] = i

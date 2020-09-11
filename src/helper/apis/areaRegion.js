@@ -26,11 +26,8 @@ export default {
    * 获取子地域列表（下一级）
    * @param {string} areaCode  父地域标识
    */
-  getListArea(areaCode) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, areaCode }
-    return $ajax.get(serverUrl('Area/GetListArea'), data)
+  getListArea(Id, GroupId) {
+    return $ajax.get(serverUrl(`${GroupId}/Region/Child/${Id}`))
   },
   /**
    * 获取从最顶级地域到 areaCode 的所有地域
@@ -47,11 +44,8 @@ export default {
    * @param {string} Id 区域标识
    * @return {AllDataListVO2<AreaRegionVO>} 区域列表
    */
-  findListRegion(Id) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, Id }
-    return $ajax.get(serverUrl('Region/FindListRegion'), data)
+  findListRegion(Id, GroupId) {
+    return $ajax.get(serverUrl(`${GroupId}/Region/${Id}`))
   },
   /**
    * 获取单个区域信息
@@ -72,20 +66,15 @@ export default {
    * @param  {String}  AreaCode     地域标示，可以有多个地域标示
    * @param  {String}  RegionCode   区域标示码，中国为101
    */
-  regionAdd({ AreaName, AreaPathObj, parentCode, FullPath, AreaCode, RegionCode }) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
+  regionAdd({ AreaName, AreaPathObj, parentCode, RegionCode, Point }, GroupId) {
     const data = {
-      account,
-      token,
       Name: AreaName,
       Radius: AreaPathObj,
       ParentId: parentCode,
-      FullPath,
-      AreaCode,
-      RegionCode
+      RegionCode,
+      Point: Point ? Point : ''
     }
-    return $ajax.post(serverUrl('Region/RegionAdd'), data)
+    return $ajax.post(serverUrl(`${GroupId}/Region`), data)
   },
   /**
    * 修改区域信息（只有管理员有权限添加）
@@ -96,20 +85,15 @@ export default {
    * @param  {String}  FullPath     区域的完整路径（父区域和子区域中间以/分割）
    * @param  {String}  RegionCode   区域标示码，中国为101
    */
-  regionSave({ Id, AreaName, AreaPathObj, parentCode, FullPath, RegionCode }) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, Id, Name: AreaName, Radius: AreaPathObj, ParentId: parentCode, FullPath, RegionCode }
-    return $ajax.put(serverUrl('Region/RegionSave'), data)
+  regionSave({ Id, AreaName, AreaPathObj, RegionCode, Point }, GroupId) {
+    const data = {Id, Name: AreaName, Radius: AreaPathObj, Point: Point ? Point : '' }
+    return $ajax.put(serverUrl(`${GroupId}/Region`), data)
   },
   /**
    * 删除区域信息（只有管理员有权限）
    * @param {string} Id 区域标识
    */
-  regionRemove(Id) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, Id }
-    return $ajax.post(serverUrl('Region/RegionRemove'), data)
+  regionRemove(Id, GroupId) {
+    return $ajax.delete(serverUrl(`${GroupId}/Region/${Id}`))
   }
 }

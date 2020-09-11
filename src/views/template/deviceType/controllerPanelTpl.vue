@@ -444,7 +444,7 @@ export default {
           this.$apis.deviceType
             .addTemplateAccessory(this.fillForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -457,7 +457,7 @@ export default {
           this.$apis.deviceType
             .saveTemplateAccessory(this.fillForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isDialogVisible = false
               this.handleRefresh()
             })
@@ -475,7 +475,7 @@ export default {
           this.$apis.deviceType
             .removeTemplateAccessory(id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {
@@ -573,7 +573,7 @@ export default {
           this.$apis.deviceType
             .addTemplateControlData(this.ControllerForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isControllerDialogVisible = false
               this.handleRefresh()
             })
@@ -586,7 +586,7 @@ export default {
           this.$apis.deviceType
             .saveTemplateControlData(this.ControllerForm)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.isControllerDialogVisible = false
               this.handleRefresh()
             })
@@ -604,7 +604,7 @@ export default {
           this.$apis.deviceType
             .removeTemplateControlData(id)
             .then(result => {
-              this.$message.success(result.Message)
+              this.$message.success(result.message)
               this.handleRefresh()
             })
             .catch(errMsg => {
@@ -621,7 +621,7 @@ export default {
       rowData.IState = IState
       try {
         const result = await this.$apis.deviceType.saveTemplateControlData(rowData)
-        this.$message.success(result.Message)
+        this.$message.success(result.message)
         // this.refreshDataDefinePanel(false)
       } catch (errMsg) {
         this.$message.error(errMsg)

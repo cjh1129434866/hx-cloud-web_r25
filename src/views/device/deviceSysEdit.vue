@@ -449,7 +449,7 @@ export default class DeviceSysEdit extends Vue {
         DeviceSysApi.updateDeviceSystemAccessory(rowData, this.deviceSn)
           .then(result => {
             this.onDataChange()
-            this.$message.success(result.Message)
+            this.$message.success(result.message)
             rowData.isEdit = false
             this.activeSysAcc = JSON.parse(JSON.stringify(rowData))
           })
@@ -462,7 +462,7 @@ export default class DeviceSysEdit extends Vue {
         DeviceSysApi.addDeviceSystemAccessory(rowData, this.deviceSn) // DeviceSn, Name, ICON, SystemId
           .then(result => {
             this.onDataChange()
-            this.$message.success(result.Message)
+            this.$message.success(result.message)
             rowData.isEdit = false // 禁止编辑
             rowData.isSave = true // 已经保存
             rowData.Id = result.Id // 设置id
@@ -487,7 +487,7 @@ export default class DeviceSysEdit extends Vue {
         DeviceSysApi.deleteDeviceSystemAccessory(id, this.deviceSn)
           .then(result => {
             this.onDataChange()
-            this.$message.success(result.Message)
+            this.$message.success(result.message)
             this.$delete(this.deviceSysAccessory, index)
             this.activeSysAcc = null // { Id: '' }
           })
@@ -617,7 +617,7 @@ export default class DeviceSysEdit extends Vue {
         DeviceSysApi.updateDeviceSystemControlData(this.deviceSn, rowData)
           .then(result => {
             this.onDataChange()
-            this.$message.success(result.Message)
+            this.$message.success(result.message)
             rowData.isEdit = false
             this.getDeviceSystemAceessoryControlData(this.activeSysAcc.Id)
           })
@@ -630,7 +630,7 @@ export default class DeviceSysEdit extends Vue {
         DeviceSysApi.addDeviceSystemControlData(this.deviceSn, rowData)
           .then(result => {
             this.onDataChange()
-            this.$message.success(result.Message)
+            this.$message.success(result.message)
             rowData.isEdit = false // 禁止编辑
             rowData.isSave = true // 已经保存
             rowData.Id = result.Id // 设置id
@@ -672,7 +672,7 @@ export default class DeviceSysEdit extends Vue {
         DeviceSysApi.deleteDeviceSystemControlData(this.deviceSn, id)
           .then(result => {
             this.onDataChange()
-            this.$message.success(result.Message)
+            this.$message.success(result.message)
             this.$delete(this.systemControlData, index)
             this.getDeviceSystemAceessoryControlData(this.activeSysAcc.Id)
           })

@@ -715,7 +715,7 @@ export default class ControlModelModule extends Vue {
         }
         DeviceTypeApi.typeTemplateAdd(data)
           .then(result => {
-            this.$message.success(result.Message)
+            this.$message.success(result.message)
           })
           .catch(errMsg => {
             this.$message.error(String(errMsg))

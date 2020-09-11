@@ -283,7 +283,7 @@ export default {
         this.$apis.device
           .changeDeviceProject(data)
           .then(result => {
-            this.$message.success(result.Message)
+            this.$message.success(result.message)
             this.$emit('dispatch-data', data)
             this.isVisible = false
           })
