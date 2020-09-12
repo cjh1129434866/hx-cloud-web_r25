@@ -57,12 +57,12 @@
                   <!-- 模式配置 -->
                   <device-type-schema :activeNode="activeNode"></device-type-schema>
                   <!-- 模板,tplClick是为了改变 activeTpl -->
-                  <device-type-template :activeNode="activeNode" :activeTpl="activeTpl" @tplClick="tplClick"></device-type-template>
+                  <!-- <device-type-template :activeNode="activeNode" :activeTpl="activeTpl" @tplClick="tplClick"></device-type-template> -->
                   <!-- 配置文件 -->
-                  <config-tpl v-show="activeTpl.Id" :activeNode="activeNode" :activeTpl="activeTpl" @handleRefresh="handleRefresh"></config-tpl>
+                  <config-tpl v-show="activeTpl.id" :activeNode="activeNode" :activeTpl="activeTpl" @handleRefresh="handleRefresh"></config-tpl>
                   <!-- 面板 panelClick 是为了改变 activePanel -->
+                  <!-- v-show="activeTpl.id" -->
                   <panel-tpl
-                    v-show="activeTpl.Id"
                     :activeNode="activeNode"
                     :activeTpl="activeTpl"
                     :activePanel="activePanel"
@@ -70,19 +70,18 @@
                     @handleRefresh="handleRefresh"
                   ></panel-tpl>
                   <!-- 数据定义面板 -->
+                  <!--  v-show="activePanel.PanelTypeId === dataDefinePanelId" -->
                   <data-define-panel-tpl
-                    v-show="activePanel.PanelTypeId === dataDefinePanelId"
                     :activeNode="activeNode"
                     :activeTpl="activeTpl"
                     :activePanel="activePanel"
                   ></data-define-panel-tpl>
                   <!-- 参数面板 -->
+                  <!-- v-show="activePanel.PanelTypeId === deviceParamPanelId" -->
                   <param-panel-tpl
-                    v-show="activePanel.PanelTypeId === deviceParamPanelId"
                     :activeNode="activeNode"
                     :activeTpl="activeTpl"
                     :activePanel="activePanel"
-                    @handleRefresh="handleRefresh"
                   ></param-panel-tpl>
                   <!-- 控制面板 -->
                   <controller-panel-tpl
@@ -281,7 +280,8 @@ export default {
               }
               return {
                 ...item,
-                icon: item.icon ? item.icon : ''
+                icon: item.icon ? item.icon : '',
+                isSave: true
               }
             })
           })(result.data);
@@ -553,6 +553,7 @@ export default {
     edit(data) {
       this.operation = 'edit'
       this.fillForm = JSON.parse(JSON.stringify(data)) // data
+      console.log(data)
       this.isDialogVisible = true
     },
 
@@ -626,6 +627,7 @@ export default {
 
     // 树节点点击事件
     handleNodeClick(data, node) {
+      console.log(node)
       this.activeNode = node // data
       this.activeTpl = {}
       this.activePanel = {}

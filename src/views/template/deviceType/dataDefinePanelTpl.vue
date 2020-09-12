@@ -144,6 +144,7 @@
 // import { $utils } from '@helper'
 import { DATA_TYPE_DIC } from '@constants/dictionaries'
 import { DATA_TYPE_BOOLEAN, DATA_TYPE_CONFIG, DATA_TYPE_UNIT_CONFIG } from '@constants/dataTypeConfig'
+import { DEVICE_DATADEFINE_PANEL } from '@constants/panelConfig'
 import { $utils } from '@helper'
 
 let self
@@ -231,7 +232,7 @@ export default {
       // pageSize: 10, // 每页显示个数
       pageSizes: [10, 20, 30], // 每页显示个数选择器的选项设置
       searchForm: {
-        sortData: 'Id',
+        sortData: 'id',
         sortType: 'asc',
         pageSize: 0, // 每页显示个数
         pageNo: 1, // 当前第几页
@@ -244,10 +245,13 @@ export default {
   computed: {},
 
   watch: {
-    activeTpl(newVal) {
-      this.searchForm.TempId = newVal.Id
-      this.fillForm.TempId = newVal.Id
+    'activeNode.data'(newVal) {
+      this.searchForm.TempId = newVal.id
+      this.fillForm.TempId = newVal.id
       this.handleRefresh()
+    },
+    activeTpl(newVal) {
+      
     }
   },
 
@@ -277,7 +281,7 @@ export default {
         this.$apis.deviceType
           .getTemplateProfile(this.searchForm)
           .then(result => {
-            const tableData = result.List
+            const tableData = result.data
             tableData.forEach(item => {
               this.tableData.push({
                 ...item,

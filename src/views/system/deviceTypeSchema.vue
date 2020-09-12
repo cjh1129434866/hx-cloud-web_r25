@@ -150,8 +150,8 @@ export default {
 
   watch: {
     'activeNode.data'(newVal) {
-      this.searchForm.TypeId = newVal.Id
-      this.fillForm.TypeId = newVal.Id
+      this.searchForm.TypeId = newVal.id
+      this.fillForm.TypeId = newVal.id
       this.handleRefresh()
     }
   },
@@ -218,10 +218,9 @@ export default {
         this.$apis.deviceType
           .getTypeSchema(this.searchForm.TypeId)
           .then(result => {
-            this.tableData = result.List
+            this.tableData = result.data
           })
           .catch(errMsg => {
-            console.error(errMsg)
             __this.$message.error(String(errMsg))
           })
           .fin(() => {

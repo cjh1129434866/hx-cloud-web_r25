@@ -150,7 +150,6 @@ export default {
   data() {
     return {
       baseData: [],
-      updateFile: [],
       validate: {
         fileName: {
           isValidate: false,
@@ -168,14 +167,16 @@ export default {
       typeFileDic: TYPE_FILE_DIC,
       filePostUrl: UPLOAD_CONFIG.deviceTypeUpgradeFileCof.url || UPLOAD_CONFIG.url,
       fileConfig: UPLOAD_CONFIG.deviceTypeUpgradeFileCof,
-      fileData: {}
+      fileData: {},
+      nodeId: ''
     }
   },
   computed: {},
 
   watch: {
     'activeNode.data'(newVal) {
-      this.updateFile = newVal.UpdateFile
+      console.log(newVal)
+      this.nodeId = newVal.id
       this.handRefresh()
     }
   },
@@ -192,18 +193,20 @@ export default {
     // -----------------Refresh--------------------
     handRefresh() {
       this.baseData = []
-      this.updateFile.forEach(item => {
-        this.baseData.push({
-          ...item,
-          // isEdit用来显示不同的操作按钮以及控制表格编辑框的显示:
-          // true  表示该数据准备修改（启用编辑框、显示保存按钮、删除按钮结合isEdit进行功能切换：若isSave为true切换为服务端删除onDelClick，为false切换为客户端删除onAddDelClick）;
-          // false 表示该数据已经修改完毕且更新成功（禁用编辑框、显示编辑按钮、删除按钮功能切换为服务端删除onDelClick）;
-          isEdit: false,
-          // isSave用来区分调用保存Or新增接口:
-          // ture  表示该数据来源于服务器,调用保存接口;
-          // false 表示该数据来源于手动添加且还未保存到服务器，调用新增接口;
-          isSave: true,
-          validate: this.$_.cloneDeep(this.validate)
+      this.$apis.deviceType.typeUpdateFile(this.nodeId).then(res => {
+        res.data.forEach(item => {
+          this.baseData.push({
+            ...item,
+            // isEdit用来显示不同的操作按钮以及控制表格编辑框的显示:
+            // true  表示该数据准备修改（启用编辑框、显示保存按钮、删除按钮结合isEdit进行功能切换：若isSave为true切换为服务端删除onDelClick，为false切换为客户端删除onAddDelClick）;
+            // false 表示该数据已经修改完毕且更新成功（禁用编辑框、显示编辑按钮、删除按钮功能切换为服务端删除onDelClick）;
+            isEdit: false,
+            // isSave用来区分调用保存Or新增接口:
+            // ture  表示该数据来源于服务器,调用保存接口;
+            // false 表示该数据来源于手动添加且还未保存到服务器，调用新增接口;
+            isSave: true,
+            validate: this.$_.cloneDeep(this.validate)
+          })
         })
       })
     },

@@ -295,8 +295,8 @@ export default {
     //   this.handleRefresh()
     // }
     'activeNode.data'(newVal) {
-      this.searchForm.TypeId = newVal.Id
-      this.fillForm.TypeId = newVal.Id
+      this.searchForm.TypeId = newVal.id
+      this.fillForm.TypeId = newVal.id
       this.handleRefresh()
     },
     _Filter(newVal) {
@@ -327,9 +327,9 @@ export default {
       this.tableData = []
       if (this.searchForm.TypeId) {
         this.$apis.deviceType
-          .getTypeStatisticsInfoList(this.searchForm.TypeId)
+          .getTypeStatisticsInfoList(this.searchForm)
           .then(result => {
-            const tableData = result.Data
+            const tableData = result.data
             this.$nextTick(() => {
               tableData.forEach(element => {
                 let _minFilter = 0

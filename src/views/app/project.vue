@@ -257,10 +257,10 @@ export default {
         if (this.projectParam.projectId !== undefined && this.projectParam.projectId !== 'undefined') {
           // 某个项目下的项目
           param.ProjectType = PROJECT_TYPE_PROJECT
-          result = await this.$apis.project.getPageProject(param)
+          result = await this.$apis.project.getPageProject(param, this.$store.state.userInfo.groupId)
         } else {
           // 所有项目
-          result = await this.$apis.project.myProject(param)
+          result = await this.$apis.project.myProject(param, this.$store.state.userInfo.groupId)
         }
         this.projectDataCount = result.DataCount
         projectData = result.Projects

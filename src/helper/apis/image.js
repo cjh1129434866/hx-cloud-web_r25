@@ -54,10 +54,7 @@ export default {
    * @param   {number}  typeId   设备类型ID
    */
   getTypeImageList(typeId) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, typeId }
-    return $ajax.get(serverUrl('TypeImages/GetTypeImageList'), data)
+    return $ajax.get(serverUrl(`type/${typeId}/TypeImage`))
   },
   /**
    * 删除设备类型图片

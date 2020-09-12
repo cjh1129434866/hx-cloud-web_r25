@@ -162,8 +162,8 @@ export default {
     //   this.handleRefresh()
     // }
     'activeNode.data'(newVal) {
-      this.searchForm.TypeId = newVal.Id
-      this.fillForm.TypeId = newVal.Id
+      this.searchForm.TypeId = newVal.id
+      this.fillForm.TypeId = newVal.id
       this.handleRefresh()
     }
   },
