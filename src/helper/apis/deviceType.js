@@ -48,7 +48,7 @@ export default {
    * @param {number} id 设备类型标识
    */
   deviceTypeRemove(id) {
-    return $ajax.post(serverUrl(`Type/${id}`))
+    return $ajax.delete(serverUrl(`Type/${id}`))
   },
   // ------------------ DeviceTypeStatisticsInfo(设备类型统计) ------------------
   /**
