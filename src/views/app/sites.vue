@@ -249,7 +249,7 @@ export default {
           result = await this.$apis.project.getPageProject(param)
         } else {
           // 所有站场
-          result = await this.$apis.project.mySites(param)
+          result = await this.$apis.project.mySites(param, this.$store.state.userInfo.groupId)
         }
         this.sitesDataCount = result.DataCount
         sitesData = result.Projects

@@ -55,11 +55,9 @@ export default {
    * 获取类型统计数据配置，获取该类型下所有的数据
    * @param {string} TypeId      设备类型标示
    */
-  getTypeStatisticsInfoList(TypeId) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, TypeId }
-    return $ajax.get(serverUrl('TypeStatisticsInfo/GetTypeStatisticsInfoList'), data)
+  getTypeStatisticsInfoList({ pageNo, pageSize, sortData, sortType, Search, TypeId }) {
+    let data = { PageNo: pageNo, PageSize: pageSize, OrderBy: sortData, OrderType: sortType, Search }
+    return $ajax.get(serverUrl(`type/${TypeId}/TypeStatistics`), data)
   },
   /**
    * 获取所有类型统计数据配置
@@ -156,11 +154,8 @@ export default {
    * 获取类型模式数据，获取该类型下所有的数据
    * @param {string} TypeId      设备类型标示
    */
-  getTypeSchema(TypeId) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, TypeId }
-    return $ajax.get(serverUrl('Schema/GetTypeSchema'), data)
+  getTypeSchema(typeId) {
+    return $ajax.get(serverUrl(`type/${typeId}/TypeSchema`))
   },
   /**
    * 添加类型模式
@@ -217,9 +212,7 @@ export default {
    * @param {string} TempName    查询：模板名称
    */
   getDeviceTypeTemplatePage({ TypeId, sortData, sortType, pageNo, pageSize, TempName, IsStandard }) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, TypeId, sortData, sortType, pageNo, pageSize, TempName, IsStandard }
+    const data = { TypeId, sortData, sortType, pageNo, pageSize, TempName, IsStandard }
     return $ajax.get(serverUrl('DeviceTypeTemplate/GetDeviceTypeTemplatePage'), data)
   },
 
@@ -280,11 +273,9 @@ export default {
    * @param {String} DataKey        查询：数据标识
    * @param {String} DataName       查询：数据名称
    */
-  getTemplateProfile({ TempId, sortData, sortType, pageNo, pageSize, DataKey, DataName }) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, TempId, sortData, sortType, pageNo, pageSize, DataKey, DataName }
-    return $ajax.get(serverUrl('DeviceTypeTemplateProfile/GetTemplateProfile'), data)
+  getTemplateProfile({ TempId, sortData, sortType, pageNo, pageSize }) {
+    const data = { OrderBy: sortData, OrderType: sortType, PageNo: pageNo, PageSize: pageSize }
+    return $ajax.get(serverUrl(`type/${TempId}/TypeDataDefine`), data)
   },
   /**
    * 添加设备类型模板数据定义
@@ -597,5 +588,19 @@ export default {
     const token = $utils.getCookie('token')
     const data = { account, token, id }
     return $ajax.post(serverUrl('TypeUpdateFile/TypeUpdateFileDelete'), data)
+  },
+
+  /* 
+  * 获取类型升级文件
+  */
+  typeUpdateFile(typeId) {
+    return $ajax.get(serverUrl(`type/${typeId}/TypeUpdateFile`))
+  },
+  /* 
+  * 获取类型参数（分页）
+  */
+  typeArgument({ TempId, sortData, sortType, pageNo, pageSize }) {
+    const data = { OrderBy: sortData, OrderType: sortType, PageNo: pageNo, PageSize: pageSize }
+    return $ajax.get(serverUrl(`type/${TempId}/TypeArgument`), data)
   }
 }

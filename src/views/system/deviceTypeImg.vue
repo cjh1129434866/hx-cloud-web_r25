@@ -118,9 +118,9 @@ export default {
     handRefresh() {
       self.baseData = []
       this.$apis.image
-        .getTypeImageList(this.activeNode.data.Id)
+        .getTypeImageList(this.activeNode.data.id)
         .then(result => {
-          result.Data.forEach(item => {
+          result.data.forEach(item => {
             self.baseData.push({
               ...item,
               // isEdit用来显示不同的操作按钮以及控制表格编辑框的显示:
@@ -137,7 +137,6 @@ export default {
         })
         .catch(errMsg => {
           this.$message.error(String(errMsg))
-          console.error(errMsg)
         })
     },
     // -----------------validate--------------------

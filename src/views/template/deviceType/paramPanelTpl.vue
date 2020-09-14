@@ -29,6 +29,17 @@
         </template>
       </el-table-column>
     </el-table>
+    <div class="table-operate">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page="searchForm.pageNo"
+        :page-sizes="pageSizes"
+        :page-size="searchForm.pageSize"
+        :total="pageTotal"
+        layout="total, sizes, prev, pager, next, jumper"
+      ></el-pagination>
+    </div>
     <!-- dialog -->
     <el-dialog :visible="isDialogVisible" width="30%" @close="isDialogVisible = false" class="edit-dialog" :close-on-click-modal="false" :show-close="false">
       <span slot="title" class="el-dialog__title">
@@ -108,13 +119,31 @@ export default {
             trigger: 'blur'
           }
         ]
-      }
+      },
+      searchForm: {
+        sortData: 'id',
+        sortType: 'asc',
+        pageSize: 0, // 每页显示个数
+        pageNo: 1, // 当前第几页
+        DataKey: '',
+        DataName: '',
+        TempId: ''
+      },
+      tableData: [],
+      pageTotal: 0, // 总条数
+      // pageSize: 10, // 每页显示个数
+      pageSizes: [10, 20, 30], // 每页显示个数选择器的选项设置
     }
   },
 
   computed: {},
 
   watch: {
+    'activeNode.data'(newVal) {
+      this.searchForm.TempId = newVal.id
+      this.fillForm.TempId = newVal.id
+      this.handleRefresh()
+    },
     activeTpl(newVal) {
       if (newVal.Id) {
         this.argsData = newVal.ArgsData
@@ -126,7 +155,30 @@ export default {
   methods: {
     // -----------------Refresh--------------------
     handleRefresh() {
-      this.$emit('handleRefresh', this.activeNode, this.activeTpl, this.activePanel)
+      this.tableData = []
+      if (this.searchForm.TempId) {
+        this.loading = true
+        this.$apis.deviceType
+          .typeArgument(this.searchForm)
+          .then(result => {
+            const tableData = result.data
+            tableData.forEach(item => {
+              this.tableData.push({
+                ...item,
+                Unit: $utils.isJsonString(item.Unit) ? JSON.parse(item.Unit) : [`${item.Unit}`]
+              })
+            })
+
+            this.pageTotal = result.DataCount
+          })
+          .catch(errMsg => {
+            this.$message.error(errMsg)
+            console.error(errMsg)
+          })
+          .fin(() => {
+            self.loading = false
+          })
+      }
     },
     // -----------------on click event--------------------
     // 新增数据
@@ -201,7 +253,19 @@ export default {
         .catch(() => {
           this.$message.success('取消删除')
         })
-    }
+    },
+     // 每页显示条目个数改变时
+    handleSizeChange(val) {
+      // console.log(`每页 ${val} 条`)
+      this.searchForm.pageSize = val
+      this.handleRefresh()
+    },
+    // 页码改变时的事件
+    handleCurrentChange(val) {
+      this.searchForm.pageNo = val
+      this.handleRefresh()
+      // console.log(`当前页: ${val}`)
+    },
   }
 }
 </script>

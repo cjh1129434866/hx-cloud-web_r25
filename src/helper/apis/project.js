@@ -69,11 +69,8 @@ export default {
    * @description projectName 查询字段：项目类型
    * @returns { ProjectPageDataListVO<ProjectVO> }
    */
-  getPageProject({ pageNo, pageSize, projectId, sortData, sortType, projectName = '', ProjectType, clientId }) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, pageNo, pageSize, projectId, sortData, sortType, projectName, ProjectType, clientId }
-    return $ajax.get(serverUrl('Project/GetPageProject'), data)
+  getPageProject(groupId) {
+    return $ajax.get(serverUrl(`${groupId}/project`), data)
   },
   /**
    * 获取我的项目，只包含有权限的最顶层的项目（分页）
@@ -85,11 +82,9 @@ export default {
    * @description projectName 查询字段：项目名称
    * @returns { ProjectPageDataListVO<ProjectVO> }
    */
-  myProject({ pageNo, pageSize, sortData, sortType, projectName = '' }) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, pageNo, pageSize, sortData, sortType, projectName }
-    return $ajax.get(serverUrl('Project/MyProject'), data)
+  myProject({ pageNo, pageSize, sortData, sortType, Search }, groupId) {
+    const data = { PageNo: pageNo, PageSize: pageSize, OrderBy: sortData, OrderType: sortType, Search: Search ? Search : ''  }
+    return $ajax.get(serverUrl(`${groupId}/project/myProject`), data)
   },
   /**
    * 获取我的项目，只包含有权限的最顶层的项目（不分页）
@@ -112,11 +107,9 @@ export default {
    * @description projectName 查询字段：项目名称
    * @returns { ProjectPageDataListVO<ProjectVO> }
    */
-  mySites({ pageNo, pageSize, sortData, sortType, projectName = '' }) {
-    const account = $utils.getCookie('account')
-    const token = $utils.getCookie('token')
-    const data = { account, token, pageNo, pageSize, sortData, sortType, projectName }
-    return $ajax.get(serverUrl('Project/MySites'), data)
+  mySites({ pageNo, pageSize, sortData, sortType, Search}, groupId) {
+    const data = { PageNo: pageNo, PageSize: pageSize, OrderBy: sortData, OrderType: sortType, Search: Search ? Search : '' }
+    return $ajax.get(serverUrl(`${groupId}/project/mySite`), data)
   },
   /**
    * 获取用户所有的站场

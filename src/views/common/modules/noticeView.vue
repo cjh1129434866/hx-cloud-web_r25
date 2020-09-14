@@ -184,7 +184,7 @@ export default {
     initTableScroll(num = 0) {
       this.$nextTick(() => {
         const $statistics = document.querySelector('.notice-table .easy-scrollbar__wrap')
-        $statistics.scrollTop = num // 将滚动条置顶
+        $statistics && ($statistics.scrollTop = num) // 将滚动条置顶
       })
     }
   }
